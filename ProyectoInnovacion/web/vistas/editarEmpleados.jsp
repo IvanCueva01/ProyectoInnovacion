@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Empleado"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="ModeloDAO.EmpleadoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -182,22 +182,41 @@
 
                         <!-- Page Heading -->
 
-                        <h1>Agregar Usuarios</h1>
-                        <p>Aqui se registran los usuarios</p>
-                        <form class="user" action="ControladorUsuario">
+                        <h1>Editar Empleados</h1>
+                        <p>Aqui se editarán los datos de los empleados</p>
+                        <%
+                            EmpleadoDAO daoemple = new EmpleadoDAO();
+                            int id = Integer.parseInt((String)request.getAttribute("idemp"));
+                            Empleado emple = (Empleado)daoemple.list(id);
+                        %>
+                        <form class="user" action="ControladorEmpleado">
                             <div class="col-sm-6 mb-3">
-                                <p>Usuario:</p>
-                                <input type="text" class="form-control form-control-user" name="nombreusu" placeholder="nombre de usuario">
+                                <p>DNI:</p>
+                                <input type="text" class="form-control form-control-user" name="dni" value="<%=emple.getDni()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Contraseña:</p>
-                                <input type="password" class="form-control form-control-user" name="contrasenia" placeholder="contraseña">
+                                <p>Nombres:</p>
+                                <input type="text" class="form-control form-control-user" name="nombre" value="<%=emple.getNombre()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Cargo:</p>
-                                <input type="text" class="form-control form-control-user" name="cargo" placeholder="cargo">
+                                <p>Apellidos:</p>
+                                <input type="text" class="form-control form-control-user" name="apellido" value="<%=emple.getApellido()%>">
                             </div>
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                            <div class="col-sm-6 mb-3">
+                                <p>Teléfono:</p>
+                                <input type="text" class="form-control form-control-user" name="telefono" value="<%=emple.getTelefono()%>">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Correo:</p>
+                                <input type="email" class="form-control form-control-user" name="correo" value="<%=emple.getCorreo()%>">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Estado:</p>
+                                <input type="text" class="form-control form-control-user" name="estado" value="<%=emple.getEstado()%>">
+                            </div>
+                            <input type="hidden" name="id" value="<%=emple.getIdemple()%>">
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
+                            <a class="btn btn-primary btn-user btn-block" href="ControladorEmpleado?accion=listar">Regresar</a>           
                         </form>
                         <!-- /.container-fluid -->
 
@@ -270,5 +289,5 @@
             <!-- Page level custom scripts -->
             <script src="js/demo/datatables-demo.js"></script>
             </body>
-            </html>
+</html>
 

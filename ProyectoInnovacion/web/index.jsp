@@ -27,7 +27,7 @@
 
         <!-- Page Wrapper -->
         <div id="wrapper">
-            
+
             <!-- Sidebar -->
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -67,10 +67,10 @@
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Acciones:</h6>
-                            <a class="collapse-item" href="Colaboradores.jsp">Reg. colaboradores</a>
-                            <a class="collapse-item" href="SvEmpleados">Ver colaboradores</a>
-                            <a class="collapse-item" href="#">Reg. incidencias</a>
-                            <a class="collapse-item" href="#">Ver incidencias</a>
+                            <a class="collapse-item" href="ControladorEmpleado?accion=listar">Listar Empleados</a>
+                            <a class="collapse-item" href="ControladorEmpleado?accion=mostraragregar">Registrar Empleados</a>
+                            <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
+                            <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
                         </div>
                     </div>
                 </li>
@@ -86,8 +86,8 @@
                          data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <h6 class="collapse-header">Acciones:</h6>
-                            <a class="collapse-item" href="Clientes.jsp">Ver clientes</a>
-                            <a class="collapse-item" href="#">Ver comprobantes</a>
+                            <a class="collapse-item" href="ControladorCliente?accion=listar">Listar Clientes</a>
+                            <a class="collapse-item" href="ControladorCliente?accion=mostraragregar">Registrar Clientes</a>
                         </div>
                     </div>
                 </li>
@@ -239,7 +239,7 @@
 
                 <!-- Page level custom scripts -->
                 <script src="js/demo/datatables-demo.js"></script>
-    </body>
-</html>
+                </body>
+                </html>
 
 

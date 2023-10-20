@@ -92,7 +92,7 @@ public class UsuarioDAO implements CRUDusuario {
 
     @Override
     public boolean editar(Usuario usu) {
-        String sql = "update usuario set nombreusu ='" + usu.getNombreUsu() + "',clave='" + usu.getContrasenia() + "',"
+        String sql = "update usuario set dni ='" + usu.getNombreUsu() + "',clave='" + usu.getContrasenia() + "',"
                 + "cargo='" + usu.getCargo() + "'where id=" + usu.getId();
         try {
             con = cn.getConnection();
@@ -113,7 +113,5 @@ public class UsuarioDAO implements CRUDusuario {
         } catch (Exception e) {
         }
         return false;
-
     }
-
 }

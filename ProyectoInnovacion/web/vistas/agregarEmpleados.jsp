@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Empleado"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="ModeloDAO.EmpleadoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -182,20 +182,32 @@
 
                         <!-- Page Heading -->
 
-                        <h1>Agregar Usuarios</h1>
-                        <p>Aqui se registran los usuarios</p>
-                        <form class="user" action="ControladorUsuario">
+                        <h1>Agregar Empleados</h1>
+                        <p>Aqui se registran los nuevos empleados</p>
+                        <form class="user" action="ControladorEmpleado">
                             <div class="col-sm-6 mb-3">
-                                <p>Usuario:</p>
-                                <input type="text" class="form-control form-control-user" name="nombreusu" placeholder="nombre de usuario">
+                                <p>DNI:</p>
+                                <input type="text" class="form-control form-control-user" name="dni" placeholder="dni">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Contraseña:</p>
-                                <input type="password" class="form-control form-control-user" name="contrasenia" placeholder="contraseña">
+                                <p>Nombres:</p>
+                                <input type="text" class="form-control form-control-user" name="nombre" placeholder="nombres">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Cargo:</p>
-                                <input type="text" class="form-control form-control-user" name="cargo" placeholder="cargo">
+                                <p>Apellidos:</p>
+                                <input type="text" class="form-control form-control-user" name="apellido" placeholder="apellidos">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Teléfono:</p>
+                                <input type="text" class="form-control form-control-user" name="telefono" placeholder="teléfono">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Correo:</p>
+                                <input type="email" class="form-control form-control-user" name="correo" placeholder="correo">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Estado:</p>
+                                <input type="text" class="form-control form-control-user" name="estado" placeholder="estado(1 o 0)">
                             </div>
                             <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
                         </form>

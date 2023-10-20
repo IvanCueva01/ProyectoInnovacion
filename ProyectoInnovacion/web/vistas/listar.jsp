@@ -71,10 +71,10 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="Colaboradores.jsp">Reg. colaboradores</a>
-                        <a class="collapse-item" href="SvEmpleados">Ver colaboradores</a>
-                        <a class="collapse-item" href="#">Reg. incidencias</a>
-                        <a class="collapse-item" href="#">Ver incidencias</a>
+                        <a class="collapse-item" href="ControladorEmpleado?accion=listar">Listar Empleados</a>
+                        <a class="collapse-item" href="ControladorEmpleado?accion=mostraragregar">Registrar Empleados</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
                     </div>
                 </div>
             </li>
@@ -90,8 +90,8 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="Clientes.jsp">Ver clientes</a>
-                        <a class="collapse-item" href="#">Ver comprobantes</a>
+                        <a class="collapse-item" href="ControladorCliente?accion=listar">Listar Clientes</a>
+                        <a class="collapse-item" href="ControladorCliente?accion=mostraragregar">Registrar Clientes</a>
                     </div>
                 </div>
             </li>
@@ -181,14 +181,14 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Usuarios</h1>
+                        <h1 class="h3 mb-2 text-gray-800">USUARIOS</h1>
                         <p class="mb-4">A continuación podrá visuzalizar la lista completa de usuarios</p>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h2 class="m-0 font-weight-bold text-primary">Lista de Usuarios</h2>
-                                    <a href="ControladorUsuario?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Usuario</a> 
+                                <a href="ControladorUsuario?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Usuario</a> 
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -228,15 +228,15 @@
                                                 <td style="display:flex;width: 230px">
                                                     <form>
                                                         <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">
-                                                        <a class="fas fa-pencil-alt" href="ControladorUsuario?accion=editar&id=<%=usu.getId()%>">Editar</a>
+                                                            <a class="fas fa-pencil-alt" href="ControladorUsuario?accion=editar&id=<%=usu.getId()%>">Editar</a>
                                                         </button>
                                                     </form>
                                                     <form>
                                                         <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red;margin-left:10px">
-                                                        <a class="fas fa-trash-alt" href="ControladorUsuario?accion=eliminar&id=<%=usu.getId()%>">Eliminar</a>
+                                                            <a class="fas fa-trash-alt" href="ControladorUsuario?accion=eliminar&id=<%=usu.getId()%>">Eliminar</a>
                                                         </button>
                                                     </form>
-                                                    
+
                                                 </td>
                                             </tr>
                                             <%}%>
