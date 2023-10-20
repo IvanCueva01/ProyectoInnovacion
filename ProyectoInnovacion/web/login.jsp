@@ -41,22 +41,17 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido al Sistema</h1>
                                     </div>
-                                    <form class="user" action="SvLogin" method="POST">
+                                    <form class="user" action="Validar" method="POST" >
                                         <div class="form-group">
-                                            <input class="form-control form-control-user"
-                                                id="usuario" name="usuario"
-                                                placeholder="Usuario">
+                                            <p>Usuario:</p>
+                                            <input type="text" class="form-control form-control-user" name="usuario" placeholder="Usuario">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                   id="contrasenia" name="contrasenia" placeholder="Contraseña">
+                                            <p>Contraseña:</p>
+                                            <input type="password" class="form-control form-control-user" name="contrasenia" placeholder="Contraseña">
                                         </div>
-                                        
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Ingresar
-                                        </button>
+                                        <input type="submit" class="btn btn-primary btn-user btn-block" name="accion" value="Ingresar">
                                         <hr>
-                                        
                                     </form>
                                 </div>
                             </div>

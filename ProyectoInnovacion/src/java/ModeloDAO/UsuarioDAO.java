@@ -17,6 +17,27 @@ public class UsuarioDAO implements CRUDusuario {
     ResultSet rs;
     Usuario usu = new Usuario();
 
+    public Usuario Validar(String usuario, String contrasenia) {
+        Usuario usu = new Usuario();
+        String sql="select * from usuario where NOMBREUSU=? and CLAVE=?";
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ps.setString(2, contrasenia);
+            rs = ps.executeQuery();
+            while (rs.next()) {       
+                usu.setId(rs.getInt("ID"));
+                usu.setNombreUsu(rs.getString("NOMBREUSU"));
+                usu.setContrasenia(rs.getString("CLAVE"));
+                usu.setCargo(rs.getString("CARGO"));
+            }
+        } catch (Exception e) {
+        }
+        return usu;
+    }
+
+    
     @Override
     public List listar() {
         ArrayList<Usuario> list = new ArrayList<>();
