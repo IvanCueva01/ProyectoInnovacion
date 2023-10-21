@@ -72,13 +72,12 @@ public class EmpleadoDAO implements CRUDempleado {
             ps.executeUpdate();
         } catch (Exception e) {
         }
-
         return false;
     }
 
     @Override
     public boolean editar(Empleado emple) {
-       String sql = "update empleado set DNI='"+emple.getDni()+"',NOMBRES='"+emple.getNombre()+"',"
+        String sql = "update empleado set DNI='"+emple.getDni()+"',NOMBRES='"+emple.getNombre()+"',"
                 +"APELLIDOS='"+emple.getApellido()+"',TELEFONO='"+emple.getTelefono()+"',ESTADO='"+emple.getEstado()+"',"
                 +"CORREO='"+emple.getCorreo()+"' where IDEMPLE="+ emple.getIdemple();
         try {
