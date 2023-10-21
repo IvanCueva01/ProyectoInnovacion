@@ -20,6 +20,10 @@
         <servlet-name>ControladorCliente</servlet-name>
         <servlet-class>Controlador.ControladorCliente</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorServicio</servlet-name>
+        <servlet-class>Controlador.ControladorServicio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>ControladorCliente</servlet-name>
         <url-pattern>/ControladorCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorServicio</servlet-name>
+        <url-pattern>/ControladorServicio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

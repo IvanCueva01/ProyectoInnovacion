@@ -73,8 +73,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorEmpleado?accion=listar">Listar Empleados</a>
                         <a class="collapse-item" href="ControladorEmpleado?accion=mostraragregar">Registrar Empleados</a>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
                     </div>
                 </div>
             </li>
@@ -92,6 +90,23 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorCliente?accion=listar">Listar Clientes</a>
                         <a class="collapse-item" href="ControladorCliente?accion=mostraragregar">Registrar Clientes</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServices"
+                   aria-expanded="true" aria-controls="collapseServices">
+                    <i class="fas fa-solid fa-list"></i>
+                    <span>Servicios</span>
+                </a>
+                <div id="collapseServices" class="collapse" aria-labelledby="headingServices"
+                     data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Acciones:</h6>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
+                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Servicios</a>
                     </div>
                 </div>
             </li>
@@ -186,8 +201,8 @@
                         <p>Actualizar datos de los clientes</p>
                         <%
                             ClienteDAO daoclien = new ClienteDAO();
-                            int id = Integer.parseInt((String)request.getAttribute("idcli"));
-                            Cliente clien = (Cliente)daoclien.list(id);
+                            int id = Integer.parseInt((String) request.getAttribute("idcli"));
+                            Cliente clien = (Cliente) daoclien.list(id);
                         %>
                         <form class="user" action="ControladorCliente">
                             <div class="col-sm-6 mb-3">

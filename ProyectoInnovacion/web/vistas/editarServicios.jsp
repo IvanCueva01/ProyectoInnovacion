@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Cliente"%>
+<%@page import="Modelo.Servicio"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ClienteDAO"%>
+<%@page import="ModeloDAO.ServicioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -196,42 +196,29 @@
 
                         <!-- Page Heading -->
 
-                        <h1>AGREGAR CLIENTES</h1>
-                        <p>Registro de nuevos clientes</p>
-                        <form class="user" action="ControladorCliente">
+                        <h1>Editar Servicio</h1>
+                        <p>Aquí se puede modificar los datos de los servicios que brindamos</p>
+                        <%
+                            ServicioDAO daoservi = new ServicioDAO();
+                            String id = (String)request.getAttribute("idservicio");
+                            Servicio servi = daoservi.list(id);
+                        %>
+                        <form class="user" action="ControladorServicio?accion=actualizar">
                             <div class="col-sm-6 mb-3">
-                                <p>DNI:</p>
-                                <input type="text" class="form-control form-control-user" name="dni" placeholder="dni">
+                                <p>ID Servicio:</p>
+                                <input type="text" class="form-control form-control-user" name="idservicio" value="<%=servi.getIdservicio()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Nombres:</p>
-                                <input type="text" class="form-control form-control-user" name="nombre" placeholder="nombres">
+                                <p>Nombre de Servicio:</p>
+                                <input type="text" class="form-control form-control-user" name="nombre" value="<%=servi.getNombre()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Apellidos:</p>
-                                <input type="text" class="form-control form-control-user" name="apellido" placeholder="apellidos">
+                                <p>Estado de servicio:</p>
+                                <input type="text" class="form-control form-control-user" name="estado" value="<%=servi.getEstado()%>">
                             </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Teléfono:</p>
-                                <input type="text" class="form-control form-control-user" name="telefono" placeholder="teléfono">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Correo:</p>
-                                <input type="email" class="form-control form-control-user" name="correo" placeholder="correo">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Dirección:</p>
-                                <input type="text" class="form-control form-control-user" name="direccion" placeholder="direccion">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Fecha de nacimiento:</p>
-                                <input type="date" class="form-control form-control-user" name="fechanac" placeholder="fecha nacimiento">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Estado:</p>
-                                <input type="text" class="form-control form-control-user" name="estado" placeholder="estado(1 o 0)">
-                            </div>
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                           
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
+                            <a class="btn btn-primary btn-user btn-block" href="ControladorServicio?accion=listar">Regresar</a>           
                         </form>
                         <!-- /.container-fluid -->
 
@@ -303,7 +290,6 @@
 
             <!-- Page level custom scripts -->
             <script src="js/demo/datatables-demo.js"></script>
-            </body>
-            </html>
-
+    </body>
+</html>
 
