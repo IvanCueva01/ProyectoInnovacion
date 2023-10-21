@@ -24,6 +24,14 @@
         <servlet-name>ControladorServicio</servlet-name>
         <servlet-class>Controlador.ControladorServicio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorIncidencia</servlet-name>
+        <servlet-class>Controlador.ControladorIncidencias</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorIncidencias</servlet-name>
+        <servlet-class>Controlador.ControladorIncidencias</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -47,6 +55,14 @@
     <servlet-mapping>
         <servlet-name>ControladorServicio</servlet-name>
         <url-pattern>/ControladorServicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorIncidencia</servlet-name>
+        <url-pattern>/ControladorIncidencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorIncidencias</servlet-name>
+        <url-pattern>/ControladorIncidencias</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
