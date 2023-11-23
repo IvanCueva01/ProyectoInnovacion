@@ -1,80 +1,101 @@
 package ModeloDAO;
 
 import Modelo.Recordatorio;
+import Interfaces.CRUDrecordatorio;
 import Config.Conexion;
 import java.sql.*;
 import java.util.*;
 
-public class RecordatorioDAO {
+public class RecordatorioDAO implements CRUDrecordatorio {
 
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
-    private Recordatorio mensaje;
+    Recordatorio rec = new Recordatorio();
 
-    public List<Recordatorio> Seleccionar() {
+    @Override
+    public List listar() {
+        ArrayList<Recordatorio> mensajes = new ArrayList<>();
         String sql = "select * from recordatorio";
-        List<Recordatorio> mensajes = new ArrayList<>();
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                int id = rs.getInt("id_mensaje");
-                String mensaje = rs.getString("mensaje");
-                String autor = rs.getString("autor");
-                String fecha = rs.getString("fecha");
-                this.mensaje = new Recordatorio(mensaje, autor,fecha);
-                mensajes.add(this.mensaje);
+                Recordatorio rec = new Recordatorio();
+                rec.setId(rs.getInt("id_mensaje"));
+                rec.setMensaje(rs.getString("mensaje"));
+                rec.setAutor(rs.getString("autor"));
+                rec.setFecha(rs.getString("fecha"));
+                mensajes.add(rec);
             }
         } catch (Exception e) {
-            
         }
         return mensajes;
     }
-    
-    public int Insertar(Recordatorio mensaje) {
+
+    @Override
+    public Recordatorio list(int id) {
+        String sql = "select * from recordatorio where id_mensaje="+id;
+        try {
+            con = cn.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                rec.setId(rs.getInt("id_mensaje"));
+                rec.setMensaje(rs.getString("mensaje"));
+                rec.setAutor(rs.getString("autor"));
+                rec.setFecha(rs.getString("fecha"));
+            }
+        } catch (Exception e) {
+        }
+        return rec;
+    }
+
+    @Override
+    public boolean agregar(Recordatorio rec) {
         String sql = "insert into recordatorio(mensaje,autor,fecha) values (?,?,CURRENT_TIME())";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, mensaje.getMensaje());
-            ps.setString(2, mensaje.getAutor());                    
+            ps.setString(1, rec.getMensaje());
+            ps.setString(2, rec.getAutor());
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
-            
-        }  
-        return 0;
+
+        }
+        return false;
     }
-    
-     public int Editar(Recordatorio mensaje) {
+
+    @Override
+    public boolean editar(Recordatorio rec) {
         String sql = "update recordatorio set mensaje=?,autor=? where id_mensaje=?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, mensaje.getMensaje());
-            ps.setString(2, mensaje.getAutor());                    
-            ps.setInt(3, mensaje.getId());                    
+            ps.setString(1, rec.getMensaje());
+            ps.setString(2, rec.getAutor());
+            ps.setInt(3, rec.getId());
             ps.executeUpdate();
-            
+
         } catch (Exception e) {
-            
-        }  
-        return 0;
+
+        }
+        return false;
     }
-     
-      public int Eliminar(Recordatorio mensaje) {
-        String sql = "delete from recordatorio where id_mensaje=?";
+
+    @Override
+    public boolean eliminar(int id) {
+        String sql = "delete from recordatorio where id_mensaje="+id;
         try {
             con = cn.getConnection();
-            ps = con.prepareStatement(sql);                   
-            ps.setInt(1, mensaje.getId());                    
+            ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
-            
-        }  
-        return 0;
+
+        }
+        return false;
     }
 }

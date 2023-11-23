@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Incidencia"%>
+<%@page import="Modelo.Recordatorio"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.IncidenciaDAO"%>
+<%@page import="ModeloDAO.RecordatorioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -154,7 +154,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -196,36 +196,24 @@
 
                         <!-- Page Heading -->
 
-                        <h1>Crear Incidencia</h1>
-                        <p>Aqui se registran los nuevas incidencias</p>
-                        <form class="user" action="ControladorIncidencias">
+                        <h1>Editar Recordatorio</h1>
+                        <%
+                            RecordatorioDAO daorec = new RecordatorioDAO();
+                            int id = Integer.parseInt((String) request.getAttribute("idrec"));
+                            Recordatorio rec = (Recordatorio) daorec.list(id);
+                        %>
+                        <form class="user" action="SvRecordatorio">
                             <div class="col-sm-6 mb-3">
-                                <p>ID cliente:</p>
-                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="id cliente">
+                                <p>Mensaje:</p>
+                                <input type="text" class="form-control form-control-user" name="mensaje" value="<%=rec.getMensaje()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>ID empleado:</p>
-                                <input type="text" class="form-control form-control-user" name="idempleado" placeholder="id empleado">
+                                <p>Autor:</p>
+                                <input type="text" class="form-control form-control-user" name="autor" value="<%=rec.getAutor()%>">
                             </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Asunto:</p>
-                                <input type="text" class="form-control form-control-user" name="asunto" placeholder="asunto">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Detalle:</p>
-                                
-                                    <input type="text" class="form-control form-control-user" name="detalle" placeholder="detalle">
-                                
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Fecha de registro:</p>
-                                <input type="date" class="form-control form-control-user" name="fecharegistro" placeholder="fecha">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Estado:</p>
-                                <input type="text" class="form-control form-control-user" name="estado" placeholder="estado">
-                            </div>
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                                <input type="hidden" name="id" value="<%=rec.getId()%>">
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
+                            <a class="btn btn-primary btn-user btn-block" href="SvRecordatorio?accion=listar">Regresar</a> 
                         </form>
                         <!-- /.container-fluid -->
 
@@ -298,5 +286,5 @@
             <!-- Page level custom scripts -->
             <script src="js/demo/datatables-demo.js"></script>
             </body>
-</html>
+            </html>
 

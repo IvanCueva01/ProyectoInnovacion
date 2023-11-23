@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class Validar extends HttpServlet {
 
@@ -46,6 +47,8 @@ public class Validar extends HttpServlet {
             String contrasenia = request.getParameter("contrasenia");
             usu = daousu.Validar(usuario, contrasenia);
             if (usu.getNombreUsu()!=null) {
+                HttpSession misession = request.getSession(true);
+                misession.setAttribute("usuario", usuario);
                 request.getRequestDispatcher("Controlador?accion=index").forward(request, response);
             }else{
                 request.getRequestDispatcher("login.jsp").forward(request, response);

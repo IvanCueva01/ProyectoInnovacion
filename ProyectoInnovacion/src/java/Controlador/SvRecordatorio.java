@@ -1,31 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package Controlador;
 
+package Controlador;
+import Modelo.Recordatorio;
+import ModeloDAO.RecordatorioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author Ivan
- */
 public class SvRecordatorio extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    String listar="./index.jsp";
+    String agregar="vistas/agregarRecordatorio.jsp";
+    String editar="vistas/editarRecordatorio.jsp";
+    Recordatorio rec = new Recordatorio();
+    RecordatorioDAO daorec = new RecordatorioDAO();
+    private int id;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -43,19 +35,46 @@ public class SvRecordatorio extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String acceso="";
+        String accion=request.getParameter("accion");
+        if (accion.equalsIgnoreCase("listar")) {
+            acceso=listar;
+        }else if (accion.equalsIgnoreCase("mostraragregar")) {
+            acceso = agregar;
+        }else if (accion.equalsIgnoreCase("agregar")) {
+            String mensaje = request.getParameter("mensaje");
+            String autor = request.getParameter("autor");
+            String fecha = request.getParameter("fecha");
+            rec.setMensaje(mensaje);
+            rec.setAutor(autor);
+            rec.setFecha(fecha);
+            daorec.agregar(rec);
+            acceso = listar;
+        }else if (accion.equalsIgnoreCase("editar")) {
+            request.setAttribute("idrec", request.getParameter("id"));
+            acceso = editar;
+        }else if (accion.equalsIgnoreCase("actualizar")) {
+            id = Integer.parseInt(request.getParameter("id"));
+            String mensaje = request.getParameter("mensaje");
+            String autor = request.getParameter("autor");
+            String fecha = request.getParameter("fecha");
+            rec.setId(id);
+            rec.setMensaje(mensaje);
+            rec.setAutor(autor);
+            rec.setFecha(fecha);
+            daorec.editar(rec);
+            acceso = listar;
+        }else if (accion.equalsIgnoreCase("eliminar")) {
+            id = Integer.parseInt(request.getParameter("id"));
+            rec.setId(id);
+            daorec.eliminar(id);
+            acceso = listar;
+        }
+        RequestDispatcher vista = request.getRequestDispatcher(acceso);
+        vista.forward(request, response);
     }
 
     /**

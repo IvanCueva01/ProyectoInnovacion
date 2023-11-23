@@ -1,10 +1,9 @@
+<%@page import="java.util.Iterator"%>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Recordatorio"%>
 <%@page import="ModeloDAO.RecordatorioDAO"%>
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -32,6 +31,16 @@
     </head>
 
     <body id="page-top">
+
+        <!-- validacion de sesion -->
+        <%
+            HttpSession misession = request.getSession();
+            String usuario = (String) request.getSession().getAttribute("usuario");
+            if (usuario == null) {
+                response.sendRedirect("login.jsp");
+            }
+        %>
+
 
         <!-- Page Wrapper -->
         <div id="wrapper">
@@ -161,7 +170,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">usuario</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                     <img class="img-profile rounded-circle"
                                          src="img/undraw_profile.svg">
                                 </a>
@@ -256,37 +265,44 @@
 
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">RECORDATORIOS</h1>
+                            <a href="SvRecordatorio?accion=mostraragregar" class="btn btn-secondary btn-user btn-link "
+                               style="color:white; margin-left:5px">
+                                <b>Agregar Recordatorio</b></a> 
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6 d-lg-inline-block">
                                 <%
                                     RecordatorioDAO recordatorioDAO = new RecordatorioDAO();
-                                    List<Recordatorio> mensajes = recordatorioDAO.Seleccionar();
+                                    List<Recordatorio> mensajes = recordatorioDAO.listar();
+                                    Iterator<Recordatorio> iter = mensajes.iterator();
+                                    Recordatorio rec = null;
                                     Collections.reverse(mensajes);
-                                    for (Recordatorio mensaje : mensajes) {
-                                            
-                                        
+                                    while (iter.hasNext()) {
+                                        rec = iter.next();
                                 %>
                                 <!-- Dropdown Card Example -->
+
                                 <div class="card shadow mb-4">
+
                                     <!-- Card Header - Dropdown -->
                                     <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary"><%mensaje.getAutor()%></h6>
+                                        class="card-header py-3 align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary"><%=rec.getAutor()%></h6>
+
                                     </div>
-                                    
                                     <!-- Card Body -->
                                     <div class="card-body">
-                                        <p class="card-text"><%mensaje.getMensaje()%></p>
-                                        <p class="blockquote-footer"><%mensaje.getFecha()%></p>
-                                        <a href="#" class="card-link">Editar</a>
-                                        <a href="#" class="card-link">Eliminar</a>
+                                        <p class="card-text"><%=rec.getMensaje()%></p>
+                                        <p class="blockquote-footer"><%=rec.getFecha()%></p>
+                                        <a href="SvRecordatorio?accion=editar&id=<%=rec.getId()%>" class="card-link">Editar</a>
+                                        <a href="SvRecordatorio?accion=eliminar&id=<%=rec.getId()%>" class="card-link">Eliminar</a>
                                     </div>
-                                </div
+                                </div>
                                 <%}%>
                             </div>
                         </div>
+
                         <!-- Footer -->     
                         <footer class="sticky-footer bg-white">
                             <div class="container my-auto">

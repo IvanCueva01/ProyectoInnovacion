@@ -10,9 +10,7 @@ public class Recordatorio {
     public Recordatorio() {
     }
 
-
     public Recordatorio( String mensaje, String autor, String fecha) {
-       
         this.mensaje = mensaje;
         this.autor = autor;
         this.fecha = fecha;
