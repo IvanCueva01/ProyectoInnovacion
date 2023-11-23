@@ -202,7 +202,8 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h2 class="m-0 font-weight-bold text-primary">Lista de Empleados</h2>
-                                <a href="ControladorEmpleado?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Empleado</a> 
+                                <a href="ControladorEmpleado?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Empleado</a>
+                                <a href="ControladorReporte" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

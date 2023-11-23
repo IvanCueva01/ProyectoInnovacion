@@ -1,8 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Cliente"%>
-<%@page import="Modelo.*"%>
+<%@page import="Modelo.Factura"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ClienteDAO"%>
+<%@page import="ModeloDAO.FacturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -124,6 +123,7 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
+                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -155,8 +155,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img class="img-profile rounded-circle"nombreUsu}</
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -196,15 +196,15 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">CLIENTES</h1>
-                        <p class="mb-4">Visualización de la lista completa de clientes</p>
+                        <h1 class="h3 mb-2 text-gray-800">FACTURACIONES</h1>
+                        <p class="mb-4">A continuación podrá visuzalizar la lista de facturaciones</p>
 
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
-                                <h2 class="m-0 font-weight-bold text-primary">Lista de Clientes</h2>
-                                <a href="ControladorCliente?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Cliente</a> 
-                                <a href="ControladorReporteCliente" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
+                                <h2 class="m-0 font-weight-bold text-primary">Lista de Facturaciones</h2>
+                                <a href="ControladorFactura?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Factura</a>
+                                <a href="ControladorReporteFactura" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -212,59 +212,50 @@
 
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
-                                                <th>DNI</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Telefono</th>
-                                                <th>Correo</th>
-                                                <th>Dirección</th>
-                                                <th>Fecha Nacimiento(Y/M/D)</th>
+                                                <th>FacturaID</th>
+                                                <th>ClienteID</th> 
+                                                <th>FechaFactura</th>
+                                                <th>ServicioID</th>
+                                                <th>Total</th>
                                                 <th style="width: 210px">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>DNI</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Telefono</th>
-                                                <th>Correo</th>
-                                                <th>Dirección</th>
-                                                <th>Fecha Nacimiento(Y/M/D)</th>
+                                            <tr>                                                                                                
+                                                <th>FacturaID</th>
+                                                <th>ClienteID</th> 
+                                                <th>FechaFactura</th>
+                                                <th>ServicioID</th>
+                                                <th>Total</th>
                                                 <th style="width: 210px">Acciones</th>
                                             </tr>
                                         </tfoot>
 
                                         <%
-                                            ClienteDAO daoclien = new ClienteDAO();
-                                            List<Cliente> list = daoclien.listar();
-                                            Iterator<Cliente> iter = list.iterator();
-                                            Cliente clien = null;
+                                            FacturaDAO daofactu = new FacturaDAO();
+                                            List<Factura> list = daofactu.listar();
+                                            Iterator<Factura> iter = list.iterator();
+                                            Factura factu = null;
                                             while (iter.hasNext()) {
-                                                clien = iter.next();
+                                                factu = iter.next();
                                         %>
 
                                         <tbody>
                                             <tr>
-                                                <td><%=clien.getIdcliente()%></td>
-                                                <td><%=clien.getDni()%></td>
-                                                <td><%=clien.getNombre()%></td>
-                                                <td><%=clien.getApellido()%></td>
-                                                <td><%=clien.getTelefono()%></td>
-                                                <td><%=clien.getCorreo()%></td>
-                                                <td><%=clien.getDireccion()%></td>
-                                                <td><%=clien.getFechanac()%></td>
+                                                <td><%=factu.getIdfactura()%></td>
+                                                <td><%=factu.getIdcliente()%></td> 
+                                                <td><%=factu.getFechafactura()%></td>
+                                                <td><%=factu.getIdservicio()%></td>        
+                                                <td><%=factu.getTotal()%></td>  
                                                 <td style="display:flex;width: 230px">
                                                     <form>
                                                         <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">
-                                                            <a class="fas fa-pencil-alt" href="ControladorCliente?accion=editar&idcliente=<%=clien.getIdcliente()%>">Editar</a>
+                                                            <a class="fas fa-pencil-alt" href="ControladorFactura?accion=editar&idfactura=<%=factu.getIdfactura()%>">Editar</a>
                                                         </button>
                                                     </form>
                                                     <form>
                                                         <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red;margin-left:10px">
-                                                            <a class="fas fa-trash-alt" href="ControladorCliente?accion=eliminar&idcliente=<%=clien.getIdcliente()%>">Eliminar</a>
+                                                            <a class="fas fa-trash-alt" href="ControladorFactura?accion=eliminar&idfactura=<%=factu.getIdfactura()%>">Eliminar</a>
                                                         </button>
                                                     </form>
 

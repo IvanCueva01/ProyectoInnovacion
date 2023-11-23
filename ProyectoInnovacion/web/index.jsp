@@ -1,4 +1,12 @@
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.List"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Recordatorio"%>
+<%@page import="ModeloDAO.RecordatorioDAO"%>
+
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -72,7 +80,7 @@
                         </div>
                     </div>
                 </li
-                
+
 
                 <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
@@ -90,7 +98,7 @@
                         </div>
                     </div>
                 </li>
-                
+
                 <li class="nav-item">
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseServices"
                        aria-expanded="true" aria-controls="collapseServices">
@@ -121,6 +129,7 @@
                             <h6 class="collapse-header">Acciones:</h6>
                             <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                             <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
+                            <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                         </div>
                     </div>
                 </li>
@@ -152,7 +161,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">usuario</span>
                                     <img class="img-profile rounded-circle"
                                          src="img/undraw_profile.svg">
                                 </a>
@@ -188,6 +197,95 @@
                         <!--page heading-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">GRUPO VICENTE</h1>
+                        </div>
+                        <div class="row">
+
+                            <!-- Earnings (Monthly) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-primary shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                                    Ganancias Mensuales</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$10,000</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Earnings (Annual) Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-success shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                    Ganancias Anuales</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">$120,000</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Pending Requests Card Example -->
+                            <div class="col-xl-3 col-md-6 mb-4">
+                                <div class="card border-left-warning shadow h-100 py-2">
+                                    <div class="card-body">
+                                        <div class="row no-gutters align-items-center">
+                                            <div class="col mr-2">
+                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                    Tareas Pendientes</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">RECORDATORIOS</h1>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <%
+                                    RecordatorioDAO recordatorioDAO = new RecordatorioDAO();
+                                    List<Recordatorio> mensajes = recordatorioDAO.Seleccionar();
+                                    Collections.reverse(mensajes);
+                                    for (Recordatorio mensaje : mensajes) {
+                                            
+                                        
+                                %>
+                                <!-- Dropdown Card Example -->
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Dropdown -->
+                                    <div
+                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                                        <h6 class="m-0 font-weight-bold text-primary"><%mensaje.getAutor()%></h6>
+                                    </div>
+                                    
+                                    <!-- Card Body -->
+                                    <div class="card-body">
+                                        <p class="card-text"><%mensaje.getMensaje()%></p>
+                                        <p class="blockquote-footer"><%mensaje.getFecha()%></p>
+                                        <a href="#" class="card-link">Editar</a>
+                                        <a href="#" class="card-link">Eliminar</a>
+                                    </div>
+                                </div
+                                <%}%>
+                            </div>
                         </div>
                         <!-- Footer -->     
                         <footer class="sticky-footer bg-white">

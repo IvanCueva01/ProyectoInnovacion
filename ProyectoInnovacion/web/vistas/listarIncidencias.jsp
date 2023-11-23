@@ -203,6 +203,7 @@
                             <div class="card-header py-3">
                                 <h2 class="m-0 font-weight-bold text-primary">Lista de Incidencias</h2>
                                 <a href="ControladorIncidencias?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Incidecnia</a> 
+                                <a href="ControladorReporteIncidencia" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">

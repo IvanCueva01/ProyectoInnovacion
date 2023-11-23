@@ -1,24 +1,24 @@
 package Modelo;
 
 public class Servicio {
-    String idservicio;
+    int idservicio;
     String nombre;
     String estado;
 
     public Servicio() {
     }
 
-    public Servicio(String idservicio, String nombre, String estado) {
+    public Servicio(int idservicio, String nombre, String estado) {
         this.idservicio = idservicio;
         this.nombre = nombre;
         this.estado = estado;
     }
 
-    public String getIdservicio() {
+    public int getIdservicio() {
         return idservicio;
     }
 
-    public void setIdservicio(String idservicio) {
+    public void setIdservicio(int idservicio) {
         this.idservicio = idservicio;
     }
 

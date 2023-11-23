@@ -27,7 +27,7 @@ public class ServicioDAO implements CRUDservicio {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Servicio servi = new Servicio();
-                servi.setIdservicio(rs.getString("idservicio"));
+                servi.setIdservicio(rs.getInt("idservicio"));
                 servi.setNombre(rs.getString("nombre"));
                 servi.setEstado(rs.getString("estado"));
                 list.add(servi);
@@ -38,15 +38,15 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public Servicio list(String idservicio) {
+    public Servicio list(int idservicio) {
         String sql = "select * from servicios where idservicio=?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, idservicio);
+            ps.setInt(1, idservicio);
             rs = ps.executeQuery();
             while (rs.next()) {
-                servi.setIdservicio(rs.getString("idservicio"));
+                servi.setIdservicio(rs.getInt("idservicio"));
                 servi.setNombre(rs.getString("nombre"));
                 servi.setEstado(rs.getString("estado"));
             }
@@ -61,7 +61,7 @@ public class ServicioDAO implements CRUDservicio {
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, servi.getIdservicio());
+            ps.setInt(1, servi.getIdservicio());
             ps.setString(2, servi.getNombre());
             ps.setString(3, servi.getEstado());
             ps.executeUpdate();
@@ -76,7 +76,7 @@ public class ServicioDAO implements CRUDservicio {
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, servi.getIdservicio());
+            ps.setInt(1, servi.getIdservicio());
             ps.setString(2, servi.getNombre());
             ps.setString(3, servi.getEstado());
             ps.executeUpdate();
@@ -86,12 +86,12 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public boolean eliminar(String idservicio) {
+    public boolean eliminar(int idservicio) {
         String sql = "update servicios set estado='0' where idservicio=?" ;
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
-            ps.setString(1, idservicio);
+            ps.setInt(1, idservicio);
             ps.executeUpdate();
         } catch (Exception e) {
         }

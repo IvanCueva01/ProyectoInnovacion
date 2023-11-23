@@ -1,8 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Cliente"%>
-<%@page import="Modelo.*"%>
+<%@page import="Modelo.Factura"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ClienteDAO"%>
+<%@page import="ModeloDAO.FacturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -124,6 +123,7 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
+                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -155,8 +155,8 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
-                                <img class="img-profile rounded-circle"nombreUsu}</
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -196,155 +196,108 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">CLIENTES</h1>
-                        <p class="mb-4">Visualización de la lista completa de clientes</p>
 
-                        <!-- DataTales Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h2 class="m-0 font-weight-bold text-primary">Lista de Clientes</h2>
-                                <a href="ControladorCliente?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Cliente</a> 
-                                <a href="ControladorReporteCliente" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
+                        <h1>AGREGAR FACTURACION</h1>
+                        <p>Registro de facturaciones</p>
+                        <form class="user" action="ControladorFactura">
+                            
+                            <div class="col-sm-6 mb-3">
+                                <p>ID CLIENTE:</p>
+                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="idcliente">
                             </div>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <div class="col-sm-6 mb-3">
+                                <p>Fecha de Factura:</p>
+                                <input type="date" class="form-control form-control-user" name="fechafactura" placeholder="fecha de factura">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>ID SERVICIO:</p>
+                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="idservicio">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Cantidad:</p>
+                                <input type="text" class="form-control form-control-user" name="cantidad" placeholder="cantidad">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Precio Unitario:</p>
+                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <p>Total:</p>
+                                <input type="text" class="form-control form-control-user" name="total" placeholder="total">
+                            </div>
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                        </form>
+                        <!-- /.container-fluid -->
 
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>DNI</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Telefono</th>
-                                                <th>Correo</th>
-                                                <th>Dirección</th>
-                                                <th>Fecha Nacimiento(Y/M/D)</th>
-                                                <th style="width: 210px">Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>DNI</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Telefono</th>
-                                                <th>Correo</th>
-                                                <th>Dirección</th>
-                                                <th>Fecha Nacimiento(Y/M/D)</th>
-                                                <th style="width: 210px">Acciones</th>
-                                            </tr>
-                                        </tfoot>
-
-                                        <%
-                                            ClienteDAO daoclien = new ClienteDAO();
-                                            List<Cliente> list = daoclien.listar();
-                                            Iterator<Cliente> iter = list.iterator();
-                                            Cliente clien = null;
-                                            while (iter.hasNext()) {
-                                                clien = iter.next();
-                                        %>
-
-                                        <tbody>
-                                            <tr>
-                                                <td><%=clien.getIdcliente()%></td>
-                                                <td><%=clien.getDni()%></td>
-                                                <td><%=clien.getNombre()%></td>
-                                                <td><%=clien.getApellido()%></td>
-                                                <td><%=clien.getTelefono()%></td>
-                                                <td><%=clien.getCorreo()%></td>
-                                                <td><%=clien.getDireccion()%></td>
-                                                <td><%=clien.getFechanac()%></td>
-                                                <td style="display:flex;width: 230px">
-                                                    <form>
-                                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">
-                                                            <a class="fas fa-pencil-alt" href="ControladorCliente?accion=editar&idcliente=<%=clien.getIdcliente()%>">Editar</a>
-                                                        </button>
-                                                    </form>
-                                                    <form>
-                                                        <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red;margin-left:10px">
-                                                            <a class="fas fa-trash-alt" href="ControladorCliente?accion=eliminar&idcliente=<%=clien.getIdcliente()%>">Eliminar</a>
-                                                        </button>
-                                                    </form>
-
-                                                </td>
-                                            </tr>
-                                            <%}%>
-                                    </table>
-                                </div>
+                    </div>
+                    <!-- End of Main Content -->
+                    <!-- Footer -->     
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Your Website 2021</span>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.container-fluid -->
+                    </footer>
+                    <!-- End of Footer -->
 
                 </div>
-                <!-- End of Main Content -->
-                <!-- Footer -->     
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
-                        </div>
-                    </div>
-                </footer>
-                <!-- End of Footer -->
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Desea salir de sesión?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Selecciona "Logout" si quieres salir de sesión.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="login.jsp">Logout</a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea salir de sesión?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Selecciona "Logout" si quieres salir de sesión.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                            <a class="btn btn-primary" href="login.jsp">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="js/demo/chart-area-demo.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>
 
-        <!--ultimos añadidos -->
+            <!--ultimos añadidos -->
 
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
-</body>
-</html>
+            <!-- Page level custom scripts -->
+            <script src="js/demo/datatables-demo.js"></script>
+            </body>
+            </html>
+
+

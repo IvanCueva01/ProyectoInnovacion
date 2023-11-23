@@ -17,7 +17,7 @@ public class ControladorServicio extends HttpServlet {
     String editar="vistas/editarServicios.jsp";
     Servicio servi = new Servicio();
     ServicioDAO daoservi = new ServicioDAO();
-    String id;
+    private int id;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class ControladorServicio extends HttpServlet {
         }else if (accion.equalsIgnoreCase("mostraragregar")) {
             acceso = agregar;
         }else if (accion.equalsIgnoreCase("agregar")) {
-            String idservicio = request.getParameter("idservicio") ;
+            int idservicio = Integer.parseInt(request.getParameter("idservicio")) ;
             String nombre = request.getParameter("nombre");
             String estado = request.getParameter("estado");
             servi.setIdservicio(idservicio);
@@ -44,16 +44,18 @@ public class ControladorServicio extends HttpServlet {
             daoservi.agregar(servi);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("editar")) {
-            request.setAttribute("idservicio", request.getParameter("idservicio"));
+            request.setAttribute("idserv", request.getParameter("idservicio"));
             acceso = editar;
         }else if (accion.equalsIgnoreCase("actualizar")) {
-            servi.setIdservicio(request.getParameter("idservicio"));
+            id = Integer.parseInt(request.getParameter("id"));
+            servi.setIdservicio(Integer.parseInt(request.getParameter("id")));
             servi.setNombre(request.getParameter("nombre"));
             servi.setEstado(request.getParameter("estado"));
             daoservi.editar(servi);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("eliminar")) {
-            id = request.getParameter("idservicio");
+            id = Integer.parseInt(request.getParameter("idservicio"));
+            servi.setIdservicio(id);
             daoservi.eliminar(id);
             acceso = listar;
         }

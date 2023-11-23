@@ -200,7 +200,7 @@
                         <p>Aquí se puede modificar los datos de los servicios que brindamos</p>
                         <%
                             ServicioDAO daoservi = new ServicioDAO();
-                            String id = (String)request.getAttribute("idservicio");
+                            int id = Integer.parseInt((String) request.getAttribute("idserv"));
                             Servicio servi = daoservi.list(id);
                         %>
                         <form class="user" action="ControladorServicio?accion=actualizar">
@@ -216,7 +216,7 @@
                                 <p>Estado de servicio:</p>
                                 <input type="text" class="form-control form-control-user" name="estado" value="<%=servi.getEstado()%>">
                             </div>
-                           
+                           <input type="hidden" name="id" value="<%=servi.getIdservicio()%>">
                             <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
                             <a class="btn btn-primary btn-user btn-block" href="ControladorServicio?accion=listar">Regresar</a>           
                         </form>

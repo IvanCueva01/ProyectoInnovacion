@@ -32,6 +32,30 @@
         <servlet-name>ControladorIncidencias</servlet-name>
         <servlet-class>Controlador.ControladorIncidencias</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorReporte</servlet-name>
+        <servlet-class>Controlador.ControladorReporte</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorReporteCliente</servlet-name>
+        <servlet-class>Controlador.ControladorReporteCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorReporteIncidencia</servlet-name>
+        <servlet-class>Controlador.ControladorReporteIncidencia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FacturaDAO</servlet-name>
+        <servlet-class>ModeloDAO.FacturaDAO</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorFactura</servlet-name>
+        <servlet-class>Controlador.ControladorFactura</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SvRecordatorio</servlet-name>
+        <servlet-class>Controlador.SvRecordatorio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -63,6 +87,30 @@
     <servlet-mapping>
         <servlet-name>ControladorIncidencias</servlet-name>
         <url-pattern>/ControladorIncidencias</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorReporte</servlet-name>
+        <url-pattern>/ControladorReporte</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorReporteCliente</servlet-name>
+        <url-pattern>/ControladorReporteCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorReporteIncidencia</servlet-name>
+        <url-pattern>/ControladorReporteIncidencia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FacturaDAO</servlet-name>
+        <url-pattern>/FacturaDAO</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorFactura</servlet-name>
+        <url-pattern>/ControladorFactura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SvRecordatorio</servlet-name>
+        <url-pattern>/SvRecordatorio</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
