@@ -1,7 +1,8 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Factura"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Articulo"%>
+<%@page import="ModeloDAO.ArticuloDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.FacturaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gruvitec System</title>
+    <title>Agregar Conocimiento</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-solid fa-laptop"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gruvitec System </div>
+                <div class="sidebar-brand-text mx-3">Gruvitec System</div>
             </a>
 
             <!-- Divider -->
@@ -104,9 +105,9 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
-                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Servicios</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Pedidos</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Pedidos</a>
+                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Productos</a>
                     </div>
                 </div>
             </li>
@@ -123,7 +124,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
-                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -197,36 +197,19 @@
 
                         <!-- Page Heading -->
 
-                        <h1>AGREGAR FACTURACION</h1>
-                        <p>Registro de facturaciones</p>
-                        <form class="user" action="ControladorFactura">
-                            
+                        <h1>Agregar Conocimiento</h1>
+                        <form class="user" action="SvArticulo">
                             <div class="col-sm-6 mb-3">
-                                <p>ID CLIENTE:</p>
-                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="idcliente">
+                                <p>Titulo:</p>
+                                <input type="text" class="form-control form-control-user" name="titulo" required>
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Fecha de Factura:</p>
-                                <input type="date" class="form-control form-control-user" name="fechafactura" placeholder="fecha de factura">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>ID SERVICIO:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="idservicio">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Cantidad:</p>
-                                <input type="text" class="form-control form-control-user" name="cantidad" placeholder="cantidad">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Precio Unitario:</p>
-                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Total:</p>
-                                <input type="text" class="form-control form-control-user" name="total" placeholder="total">
+                                <p>Contenido:</p>
+                                <textarea id="id" name="contenido" rows="20" cols="100" required></textarea>
                             </div>
                             <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
                         </form>
+                        <a href="SvArticulo?accion=listar">Volver</a>
                         <!-- /.container-fluid -->
 
                     </div>
@@ -299,5 +282,4 @@
             <script src="js/demo/datatables-demo.js"></script>
             </body>
             </html>
-
 

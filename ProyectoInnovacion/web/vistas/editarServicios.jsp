@@ -154,7 +154,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -201,13 +201,9 @@
                         <%
                             ServicioDAO daoservi = new ServicioDAO();
                             int id = Integer.parseInt((String) request.getAttribute("idserv"));
-                            Servicio servi = daoservi.list(id);
+                            Servicio servi = (Servicio) daoservi.list(id);
                         %>
-                        <form class="user" action="ControladorServicio?accion=actualizar">
-                            <div class="col-sm-6 mb-3">
-                                <p>ID Servicio:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" value="<%=servi.getIdservicio()%>">
-                            </div>
+                        <form class="user" action="ControladorServicio">
                             <div class="col-sm-6 mb-3">
                                 <p>Nombre de Servicio:</p>
                                 <input type="text" class="form-control form-control-user" name="nombre" value="<%=servi.getNombre()%>">
@@ -216,7 +212,7 @@
                                 <p>Estado de servicio:</p>
                                 <input type="text" class="form-control form-control-user" name="estado" value="<%=servi.getEstado()%>">
                             </div>
-                           <input type="hidden" name="id" value="<%=servi.getIdservicio()%>">
+                           <input type="hidden" name="txtid" value="<%=servi.getIdservicio()%>">
                             <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
                             <a class="btn btn-primary btn-user btn-block" href="ControladorServicio?accion=listar">Regresar</a>           
                         </form>

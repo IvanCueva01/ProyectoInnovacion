@@ -155,7 +155,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -258,7 +258,6 @@
                                                             <a class="fas fa-trash-alt" href="ControladorFactura?accion=eliminar&idfactura=<%=factu.getIdfactura()%>">Eliminar</a>
                                                         </button>
                                                     </form>
-
                                                 </td>
                                             </tr>
                                             <%}%>

@@ -154,7 +154,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -199,10 +199,6 @@
                         <h1>Agregar Servicio</h1>
                         <p>Aqui se puede añadir nuevos servicios</p>
                         <form class="user" action="ControladorServicio">
-                            <div class="col-sm-6 mb-3">
-                                <p>ID Servicio:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="ID">
-                            </div>
                             <div class="col-sm-6 mb-3">
                                 <p>Nombre de Servicio:</p>
                                 <input type="text" class="form-control form-control-user" name="nombre" placeholder="NOMBRE">

@@ -154,7 +154,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("Usuario")%></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"
                                      src="img/undraw_profile.svg">
                             </a>
@@ -202,7 +202,7 @@
                         <div class="card shadow mb-4">
                             <div class="card-header py-3">
                                 <h2 class="m-0 font-weight-bold text-primary">Lista de Incidencias</h2>
-                                <a href="ControladorIncidencias?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Incidecnia</a> 
+                                <a href="ControladorIncidencias?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar Incidencia</a> 
                                 <a href="ControladorReporteIncidencia" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
                             </div>
                             <div class="card-body">

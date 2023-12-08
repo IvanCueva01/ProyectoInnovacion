@@ -35,10 +35,8 @@ public class ControladorServicio extends HttpServlet {
         }else if (accion.equalsIgnoreCase("mostraragregar")) {
             acceso = agregar;
         }else if (accion.equalsIgnoreCase("agregar")) {
-            int idservicio = Integer.parseInt(request.getParameter("idservicio")) ;
             String nombre = request.getParameter("nombre");
             String estado = request.getParameter("estado");
-            servi.setIdservicio(idservicio);
             servi.setNombre(nombre);
             servi.setEstado(estado);
             daoservi.agregar(servi);
@@ -47,10 +45,12 @@ public class ControladorServicio extends HttpServlet {
             request.setAttribute("idserv", request.getParameter("idservicio"));
             acceso = editar;
         }else if (accion.equalsIgnoreCase("actualizar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            servi.setIdservicio(Integer.parseInt(request.getParameter("id")));
-            servi.setNombre(request.getParameter("nombre"));
-            servi.setEstado(request.getParameter("estado"));
+            id = Integer.parseInt(request.getParameter("txtid"));
+            String nombre = request.getParameter("nombre");
+            String estado = request.getParameter("estado");
+            servi.setIdservicio(id);
+            servi.setNombre(nombre);
+            servi.setEstado(estado);
             daoservi.editar(servi);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("eliminar")) {

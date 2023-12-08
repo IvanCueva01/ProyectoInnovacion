@@ -1,7 +1,9 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Factura"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Articulo"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.FacturaDAO"%>
+<%@page import="ModeloDAO.UsuarioDAO"%>
+<%@page import="ModeloDAO.ArticuloDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -123,7 +125,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
-                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -196,36 +197,16 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-
-                        <h1>AGREGAR FACTURACION</h1>
-                        <p>Registro de facturaciones</p>
-                        <form class="user" action="ControladorFactura">
-                            
-                            <div class="col-sm-6 mb-3">
-                                <p>ID CLIENTE:</p>
-                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="idcliente">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Fecha de Factura:</p>
-                                <input type="date" class="form-control form-control-user" name="fechafactura" placeholder="fecha de factura">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>ID SERVICIO:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="idservicio">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Cantidad:</p>
-                                <input type="text" class="form-control form-control-user" name="cantidad" placeholder="cantidad">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Precio Unitario:</p>
-                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
-                            </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Total:</p>
-                                <input type="text" class="form-control form-control-user" name="total" placeholder="total">
-                            </div>
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                        <%
+                            ArticuloDAO artidao = new ArticuloDAO();
+                            int id = Integer.parseInt((String) request.getAttribute("idarti"));
+                            Articulo arti = artidao.list(id);
+                        %>
+                        <form class="user" action="SvArticulo">
+                            <h1><%= arti.getTitulo()%></h1>
+                            <p><%= arti.getContenido()%></p>
+                            <input type="hidden" name="id" value="<%=arti.getId()%>">
+                            <a class="btn btn-primary btn-user btn-block" href="SvArticulo?accion=listar">Regresar</a>
                         </form>
                         <!-- /.container-fluid -->
 
@@ -299,5 +280,6 @@
             <script src="js/demo/datatables-demo.js"></script>
             </body>
             </html>
+
 
 

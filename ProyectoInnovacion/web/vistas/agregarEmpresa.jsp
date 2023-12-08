@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Factura"%>
+<%@page import="Modelo.Cliente"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.FacturaDAO"%>
+<%@page import="ModeloDAO.ClienteDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -123,7 +123,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
-                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -197,33 +196,32 @@
 
                         <!-- Page Heading -->
 
-                        <h1>AGREGAR FACTURACION</h1>
-                        <p>Registro de facturaciones</p>
-                        <form class="user" action="ControladorFactura">
-                            
+                        <h1>AGREGAR EMPRESAS</h1>
+                        <p>Registro de nuevos empresas</p>
+                        <form class="user" action="ControladorEmpresa">
                             <div class="col-sm-6 mb-3">
-                                <p>ID CLIENTE:</p>
-                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="idcliente">
+                                <p>RUC:</p>
+                                <input type="text" class="form-control form-control-user" name="ruc" placeholder="número de RUC">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Fecha de Factura:</p>
-                                <input type="date" class="form-control form-control-user" name="fechafactura" placeholder="fecha de factura">
+                                <p>Razón Social:</p>
+                                <input type="text" class="form-control form-control-user" name="razonsocial" placeholder="Razón Social">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>ID SERVICIO:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="idservicio">
+                                <p>Teléfono:</p>
+                                <input type="text" class="form-control form-control-user" name="telefono" placeholder="teléfono">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Cantidad:</p>
-                                <input type="text" class="form-control form-control-user" name="cantidad" placeholder="cantidad">
+                                <p>Correo:</p>
+                                <input type="email" class="form-control form-control-user" name="correo" placeholder="correo">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Precio Unitario:</p>
-                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
+                                <p>Dirección:</p>
+                                <input type="text" class="form-control form-control-user" name="direccion" placeholder="direccion">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Total:</p>
-                                <input type="text" class="form-control form-control-user" name="total" placeholder="total">
+                                <p>Estado:</p>
+                                <input type="text" class="form-control form-control-user" name="estado" placeholder="estado(1 o 0)">
                             </div>
                             <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
                         </form>

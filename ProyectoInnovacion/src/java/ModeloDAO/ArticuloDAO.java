@@ -1,36 +1,36 @@
 package ModeloDAO;
 
 import Config.Conexion;
-import Interfaces.CRUDservicio;
-import Modelo.Servicio;
+import Interfaces.CRUDarticulo;
+import Modelo.Articulo;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ServicioDAO implements CRUDservicio {
+public class ArticuloDAO implements CRUDarticulo {
 
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
-    Servicio servi = new Servicio();
+    Articulo arti = new Articulo();
 
     @Override
     public List listar() {
-        ArrayList<Servicio> list = new ArrayList<>();
-        String sql = "select * from servicios";
+        ArrayList<Articulo> list = new ArrayList<>();
+        String sql = "select * from articulo";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Servicio servi = new Servicio();
-                servi.setIdservicio(rs.getInt("idservicio"));
-                servi.setNombre(rs.getString("nombre"));
-                servi.setEstado(rs.getString("estado"));
-                list.add(servi);
+                Articulo arti = new Articulo();
+                arti.setId(rs.getInt("id"));
+                arti.setTitulo(rs.getString("titulo"));
+                arti.setContenido(rs.getString("contenido"));
+                list.add(arti);
             }
         } catch (Exception e) {
         }
@@ -38,25 +38,26 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public Servicio list(int idservicio) {
-        String sql = "select * from servicios where idservicio=" + idservicio;
+    public Articulo list(int id) {
+        String sql = "select * from articulo";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                servi.setIdservicio(rs.getInt("idservicio"));
-                servi.setNombre(rs.getString("nombre"));
-                servi.setEstado(rs.getString("estado"));
+                arti.setId(rs.getInt("id"));
+                arti.setTitulo(rs.getString("titulo"));
+                arti.setContenido(rs.getString("contenido"));
             }
         } catch (Exception e) {
         }
-        return servi;
+        return arti;
     }
 
     @Override
-    public boolean agregar(Servicio servi) {
-        String sql = "insert into servicios(nombre,estado) values ('" + servi.getNombre()+ "','" + servi.getEstado()+ "')";
+    public boolean agregar(Articulo arti) {
+        String sql = "insert into articulo(titulo,contenido) values "
+                + "('" + arti.getTitulo() + "','" + arti.getContenido() + "')";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -67,9 +68,8 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public boolean editar(Servicio servi) {
-        String sql = "update servicios set nombre='" + servi.getNombre()+ "',estado='" + servi.getNombre()+ "' where idservicio="
-                +servi.getIdservicio();
+    public boolean editar(Articulo arti) {
+        String sql = "update articulo set titulo='" + arti.getTitulo() + "',contenido='" + arti.getContenido() + "'";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -80,15 +80,15 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public boolean eliminar(int idservicio) {
-        String sql = "update servicios set estado='0' where idservicio=" + idservicio ;
+    public boolean eliminar(int id) {
+        String sql = "delete from articulo where id=" + id;
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
+
         }
         return false;
     }
-
 }

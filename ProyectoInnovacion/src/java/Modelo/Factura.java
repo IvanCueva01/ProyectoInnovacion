@@ -12,8 +12,7 @@ public class Factura {
     public Factura() {
     }
 
-    public Factura(int idfactura, int idcliente, String fechafactura, int idservicio, int cantidad, double precioUnitario, double total) {
-        this.idfactura = idfactura;
+    public Factura(int idcliente, String fechafactura, int idservicio, int cantidad, double precioUnitario, double total) {
         this.idcliente = idcliente;
         this.fechafactura = fechafactura;
         this.idservicio = idservicio;
@@ -71,7 +70,7 @@ public class Factura {
     }
 
     public double getTotal() {
-        return total;
+        return total=precioUnitario*cantidad;
     }
 
     public void setTotal(double total) {

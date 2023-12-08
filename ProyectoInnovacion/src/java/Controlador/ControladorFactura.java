@@ -50,8 +50,8 @@ public class ControladorFactura extends HttpServlet {
             String fechafactura = request.getParameter("fechafactura");
             int idservicio = Integer.parseInt(request.getParameter("idservicio")) ;
             int cantidad = Integer.parseInt(request.getParameter("cantidad")) ;
-            double precioUnitario = Integer.parseInt(request.getParameter("cantidad")) ;
-            double total = Integer.parseInt(request.getParameter("cantidad")) ;
+            double precioUnitario = Double.parseDouble(request.getParameter("precioUnitario")) ;
+            double total = Double.parseDouble(request.getParameter("total")) ;
             factu.setIdcliente(idcliente);
             factu.setFechafactura(fechafactura);
             factu.setIdservicio(idservicio);

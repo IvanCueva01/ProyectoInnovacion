@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Factura"%>
+<%@page import="Modelo.Empresa"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.FacturaDAO"%>
+<%@page import="ModeloDAO.EmpresaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -110,6 +110,7 @@
                     </div>
                 </div>
             </li>
+
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers"
@@ -123,7 +124,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
-                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
                     </div>
                 </div>
             </li>
@@ -197,35 +197,41 @@
 
                         <!-- Page Heading -->
 
-                        <h1>AGREGAR FACTURACION</h1>
-                        <p>Registro de facturaciones</p>
-                        <form class="user" action="ControladorFactura">
-                            
+                        <h1>EDITAR EMPRESAS</h1>
+                        <p>Actualizar datos de las empresas</p>
+                        <%
+                            EmpresaDAO daoempre = new EmpresaDAO();
+                            int id = Integer.parseInt((String) request.getAttribute("idempre"));
+                            Empresa empre = (Empresa) daoempre.list(id);
+                        %>
+                        <form class="user" action="ControladorEmpresa">
                             <div class="col-sm-6 mb-3">
-                                <p>ID CLIENTE:</p>
-                                <input type="text" class="form-control form-control-user" name="idcliente" placeholder="idcliente">
+                                <p>RUC:</p>
+                                <input type="text" class="form-control form-control-user" name="ruc" value="<%=empre.getRuc()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Fecha de Factura:</p>
-                                <input type="date" class="form-control form-control-user" name="fechafactura" placeholder="fecha de factura">
+                                <p>Razón Social:</p>
+                                <input type="text" class="form-control form-control-user" name="razonsocial" value="<%=empre.getRazonsocial()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>ID SERVICIO:</p>
-                                <input type="text" class="form-control form-control-user" name="idservicio" placeholder="idservicio">
+                                <p>Teléfono:</p>
+                                <input type="text" class="form-control form-control-user" name="telefono" value="<%=empre.getTelefono()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Cantidad:</p>
-                                <input type="text" class="form-control form-control-user" name="cantidad" placeholder="cantidad">
+                                <p>Correo:</p>
+                                <input type="email" class="form-control form-control-user" name="correo" value="<%=empre.getCorreo()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Precio Unitario:</p>
-                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
+                                <p>Dirección:</p>
+                                <input type="text" class="form-control form-control-user" name="direccion" value="<%=empre.getDireccion()%>">
                             </div>
                             <div class="col-sm-6 mb-3">
-                                <p>Total:</p>
-                                <input type="text" class="form-control form-control-user" name="total" placeholder="total">
+                                <p>Estado:</p>
+                                <input type="text" class="form-control form-control-user" name="estado" value="<%=empre.getEstado()%>">
                             </div>
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
+                            <input type="hidden" name="txtid" value="<%=empre.getId()%>">
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
+                            <a class="btn btn-primary btn-user btn-block" href="ControladorEmpresa?accion=listar">Regresar</a>           
                         </form>
                         <!-- /.container-fluid -->
 

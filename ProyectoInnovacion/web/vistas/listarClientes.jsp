@@ -1,8 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Cliente"%>
 <%@page import="Modelo.*"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ClienteDAO"%>
+<%@page import="ModeloDAO.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -155,7 +154,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"></span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%=request.getSession().getAttribute("usuario")%></span>
                                 <img class="img-profile rounded-circle"nombreUsu}</
                                      src="img/undraw_profile.svg">
                             </a>
@@ -275,76 +274,152 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- /.container-fluid -->
+                                    
+                        <div class="container-fluid">
 
-                </div>
-                <!-- End of Main Content -->
-                <!-- Footer -->     
-                <footer class="sticky-footer bg-white">
-                    <div class="container my-auto">
-                        <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; Your Website 2021</span>
+                            <!-- Page Heading -->
+                            <h1 class="h3 mb-2 text-gray-800">Empresas</h1>
+                            <p class="mb-4">Visualización de la lista completa de empresas</p>
+                            
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h2 class="m-0 font-weight-bold text-primary">Lista de Empresas</h2>
+                                    <a href="ControladorEmpresa?accion=mostraragregar" class="btn btn-primary btn-user btn-block">Agregar empresa</a> 
+                                    <a href="ControladorReporteEmpresa" class="btn btn-secondary btn-user btn-block">Generar Reporte</a>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>RUC</th>
+                                                    <th>Razon Social</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
+                                                    <th>Dirección</th>
+                                                    <th style="width: 210px">Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>RUC</th>
+                                                    <th>Razon Social</th>
+                                                    <th>Telefono</th>
+                                                    <th>Correo</th>
+                                                    <th>Dirección</th>
+                                                    <th style="width: 210px">Acciones</th>
+                                                </tr>
+                                            </tfoot>
+
+                                            <%
+                                                EmpresaDAO daoempre = new EmpresaDAO();
+                                                List<Empresa> lista = daoempre.listar();
+                                                Iterator<Empresa> itera = lista.iterator();
+                                                Empresa empre = null;
+                                                while (itera.hasNext()) {
+                                                    empre = itera.next();
+                                            %>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td><%=empre.getId()%></td>
+                                                    <td><%=empre.getRuc()%></td>
+                                                    <td><%=empre.getRazonsocial()%></td>
+                                                    <td><%=empre.getTelefono()%></td>
+                                                    <td><%=empre.getCorreo()%></td>
+                                                    <td><%=empre.getDireccion()%></td> 
+                                                    <td style="display:flex;width: 230px">
+                                                        <form>
+                                                            <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">
+                                                                <a class="fas fa-pencil-alt" href="ControladorEmpresa?accion=editar&id=<%=empre.getId()%>">Editar</a>
+                                                            </button>
+                                                        </form>
+                                                        <form>
+                                                            <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red;margin-left:10px">
+                                                                <a class="fas fa-trash-alt" href="ControladorEmpresa?accion=eliminar&id=<%=empre.getId()%>">Eliminar</a>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                <%}%>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </footer>
-                <!-- End of Footer -->
+                        <!-- /.container-fluid -->
+
+                    </div>
+                    <!-- End of Main Content -->
+                    <!-- Footer -->     
+                    <footer class="sticky-footer bg-white">
+                        <div class="container my-auto">
+                            <div class="copyright text-center my-auto">
+                                <span>Copyright &copy; Your Website 2021</span>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End of Footer -->
+
+                </div>
+                <!-- End of Content Wrapper -->
 
             </div>
-            <!-- End of Content Wrapper -->
+            <!-- End of Page Wrapper -->
 
-        </div>
-        <!-- End of Page Wrapper -->
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-        <!-- Scroll to Top Button-->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Desea salir de sesión?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"></span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Selecciona "Logout" si quieres salir de sesión.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="login.jsp">Logout</a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Desea salir de sesión?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Selecciona "Logout" si quieres salir de sesión.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                            <a class="btn btn-primary" href="login.jsp">Logout</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <!-- Bootstrap core JavaScript-->
+            <script src="vendor/jquery/jquery.min.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core plugin JavaScript-->
-        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+            <!-- Core plugin JavaScript-->
+            <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-        <!-- Custom scripts for all pages-->
-        <script src="js/sb-admin-2.min.js"></script>
+            <!-- Custom scripts for all pages-->
+            <script src="js/sb-admin-2.min.js"></script>
 
-        <!-- Page level plugins -->
-        <script src="vendor/chart.js/Chart.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="vendor/chart.js/Chart.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/chart-area-demo.js"></script>
-        <script src="js/demo/chart-pie-demo.js"></script>
+            <!-- Page level custom scripts -->
+            <script src="js/demo/chart-area-demo.js"></script>
+            <script src="js/demo/chart-pie-demo.js"></script>
 
-        <!--ultimos añadidos -->
+            <!--ultimos añadidos -->
 
-        <!-- Page level plugins -->
-        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+            <!-- Page level plugins -->
+            <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+            <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="js/demo/datatables-demo.js"></script>
-</body>
-</html>
+            <!-- Page level custom scripts -->
+            <script src="js/demo/datatables-demo.js"></script>
+            </body>
+            </html>

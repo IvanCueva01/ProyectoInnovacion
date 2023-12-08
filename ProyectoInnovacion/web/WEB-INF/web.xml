@@ -56,6 +56,14 @@
         <servlet-name>SvRecordatorio</servlet-name>
         <servlet-class>Controlador.SvRecordatorio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorEmpresa</servlet-name>
+        <servlet-class>Controlador.ControladorEmpresa</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SvArticulo</servlet-name>
+        <servlet-class>Controlador.SvArticulo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>SvRecordatorio</servlet-name>
         <url-pattern>/SvRecordatorio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorEmpresa</servlet-name>
+        <url-pattern>/ControladorEmpresa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SvArticulo</servlet-name>
+        <url-pattern>/SvArticulo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
