@@ -204,6 +204,10 @@
                                 <input type="text" class="form-control form-control-user" name="titulo" required>
                             </div>
                             <div class="col-sm-6 mb-3">
+                                <p>Sección:</p>
+                                <input type="text" class="form-control form-control-user" name="idseccion" required>
+                            </div>
+                            <div class="col-sm-6 mb-3">
                                 <p>Contenido:</p>
                                 <textarea id="id" name="contenido" rows="20" cols="100" required></textarea>
                             </div>

@@ -14,7 +14,7 @@ public class ControladorServicio extends HttpServlet {
     
     String listar="vistas/listarServicios.jsp";
     String agregar="vistas/agregarServicios.jsp";
-    String editar="vistas/editarServicios.jsp";
+    String editar="./vistas/editarServicios.jsp";
     Servicio servi = new Servicio();
     ServicioDAO daoservi = new ServicioDAO();
     private int id;
@@ -42,10 +42,10 @@ public class ControladorServicio extends HttpServlet {
             daoservi.agregar(servi);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("editar")) {
-            request.setAttribute("idserv", request.getParameter("idservicio"));
+            request.setAttribute("idservi", request.getParameter("idservicio"));
             acceso = editar;
         }else if (accion.equalsIgnoreCase("actualizar")) {
-            id = Integer.parseInt(request.getParameter("txtid"));
+            id = Integer.parseInt(request.getParameter("id"));
             String nombre = request.getParameter("nombre");
             String estado = request.getParameter("estado");
             servi.setIdservicio(id);

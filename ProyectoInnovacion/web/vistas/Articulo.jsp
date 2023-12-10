@@ -2,6 +2,8 @@
 <%@page import="java.util.List"%>
 <%@page import="Modelo.Usuario"%>
 <%@page import="Modelo.Articulo"%>
+<%@page import="Modelo.Seccion"%>
+<%@page import="ModeloDAO.SeccionDAO"%>
 <%@page import="ModeloDAO.ArticuloDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -207,30 +209,83 @@
                         <!--page heading-->
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">Base de Conocimiento</h1>
+                            <a href="ControladorSeccion?accion=mostraragregar" class="btn btn-secondary btn-user btn-link "
+                               style="color:white; margin-left:5px">
+                                <b>Agregar Sección</b></a> <br><br>
+                        </div>
+                        <%
+                            SeccionDAO daosec = new SeccionDAO();
+                            List<Seccion> lista = daosec.listar();
+                            Iterator<Seccion> itera = lista.iterator();
+                            Seccion sec = null;
+                            while (itera.hasNext()) {
+                                sec = itera.next();
+                        %>
+                        <%}%> 
+                        <div class="align-items-center justify-content-between mb-4">
                             <a href="SvArticulo?accion=mostraragregar" class="btn btn-secondary btn-user btn-link "
                                style="color:white; margin-left:5px">
-                                <b>Agregar Conocimiento</b></a> <br><br>
-                               
-
+                                <b>Agregar Conocimiento</b></a>                        
                         </div>
-                         <%
-                                    ArticuloDAO artidao = new ArticuloDAO();
-                                    List<Articulo> list = artidao.listar();
-                                    Iterator<Articulo> iter = list.iterator();
-                                    Articulo arti = null;
-                                    while (iter.hasNext()) {
-                                        arti = iter.next();
-                                %>
-                                <div >
-                                <ul>                            
-                                    <li>
-                                        <a href="SvArticulo?accion=editar&id=<%=arti.getId()%>">
-                                            <%=arti.getTitulo()%>
-                                        </a>
-                                    </li>                               
-                                </ul>
-                                <%}%>
+
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>TITULO</th>
+                                            <th>SECCION</th>
+                                            <th style="width: 210px">Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>TITULO</th>
+                                            <th>SECCION</th>
+                                            <th style="width: 210px">Acciones</th>
+                                        </tr>
+                                    </tfoot>
+
+                                    <%
+                                        ArticuloDAO artidao = new ArticuloDAO();
+                                        List<Articulo> list = artidao.listar();
+                                        Iterator<Articulo> iter = list.iterator();
+                                        Articulo arti = null;
+                                        while (iter.hasNext()) {
+                                            arti = iter.next();
+                                    %>
+
+                                    <tbody>
+                                        <tr>
+                                            <td><%=arti.getId()%></td>
+                                            <td>
+                                                <a href="SvArticulo?accion=editar&id=<%=arti.getId()%>">
+                                                    <%=arti.getTitulo()%>
+                                                </a>
+                                            </td>
+                                            <td><%=arti.getIdseccion()%></td>
+                                            <td style="display:flex;width: 230px">
+                                                <form>
+                                                    <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">
+                                                        <a class="fas fa-pencil-alt" href="ControladorArticulo?accion=editar&id=<%=arti.getId()%>">Editar</a>
+                                                    </button>
+                                                </form>
+                                                <form>
+                                                    <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:red;margin-left:10px">
+                                                        <a class="fas fa-trash-alt" href="ControladorArticulo?accion=eliminar&id=<%=arti.getId()%>">Eliminar</a>
+                                                    </button>
+                                                </form>
+
+                                            </td>
+                                        </tr>
+                                        <%}%>
+                                </table>
                             </div>
+                        </div>
+
 
 
 

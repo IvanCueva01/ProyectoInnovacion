@@ -219,7 +219,7 @@
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <p>Precio Unitario:</p>
-                                <input type="text" class="form-control form-control-user" name="preciounitario" placeholder="precio">
+                                <input type="text" class="form-control form-control-user" name="precioUnitario" placeholder="precio">
                             </div>
                             <div class="col-sm-6 mb-3">
                                 <p>Total:</p>

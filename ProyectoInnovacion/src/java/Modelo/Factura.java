@@ -70,7 +70,7 @@ public class Factura {
     }
 
     public double getTotal() {
-        return total=precioUnitario*cantidad;
+        return total;
     }
 
     public void setTotal(double total) {

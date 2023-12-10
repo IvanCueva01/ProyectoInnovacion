@@ -8,8 +8,7 @@ public class Servicio {
     public Servicio() {
     }
 
-    public Servicio(int idservicio, String nombre, String estado) {
-        this.idservicio = idservicio;
+    public Servicio(String nombre, String estado) {
         this.nombre = nombre;
         this.estado = estado;
     }

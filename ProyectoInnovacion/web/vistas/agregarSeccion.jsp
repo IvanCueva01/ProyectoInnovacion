@@ -1,7 +1,8 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Servicio"%>
+<%@page import="Modelo.Usuario"%>
+<%@page import="Modelo.Seccion"%>
+<%@page import="ModeloDAO.SeccionDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.ServicioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gruvitec System</title>
+    <title>Agregar Seccion</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-solid fa-laptop"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gruvitec System </div>
+                <div class="sidebar-brand-text mx-3">Gruvitec System</div>
             </a>
 
             <!-- Divider -->
@@ -104,9 +105,9 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
-                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Servicios</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Pedidos</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Pedidos</a>
+                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Productos</a>
                     </div>
                 </div>
             </li>
@@ -196,26 +197,15 @@
 
                         <!-- Page Heading -->
 
-                        <h1>Editar Servicio</h1>
-                        <p>Aquí se puede modificar los datos de los servicios que brindamos</p>
-                        <%
-                            ServicioDAO daoservi = new ServicioDAO();
-                            int id = Integer.parseInt((String)request.getAttribute("idservi"));
-                            Servicio servi = (Servicio) daoservi.list(id);
-                        %>
-                        <form class="user" action="ControladorServicio">
+                        <h1>Agregar Sección</h1>
+                        <form class="user" action="ControladorSeccion">
                             <div class="col-sm-6 mb-3">
-                                <p>Nombre de Servicio:</p>
-                                <input type="text" class="form-control form-control-user" name="nombre" value="<%=servi.getNombre()%>">
+                                <p>Titulo:</p>
+                                <input type="text" class="form-control form-control-user" name="titulo" required>
                             </div>
-                            <div class="col-sm-6 mb-3">
-                                <p>Estado de servicio:</p>
-                                <input type="text" class="form-control form-control-user" name="estado" value="<%=servi.getEstado()%>">
-                            </div>
-                           <input type="hidden" name="id" value="<%=servi.getIdservicio()%>">
-                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
-                            <a class="btn btn-primary btn-user btn-block" href="ControladorServicio?accion=listar">Regresar</a>           
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="agregar">           
                         </form>
+                        <a href="ControladorSeccion?accion=listar">Volver</a>
                         <!-- /.container-fluid -->
 
                     </div>
@@ -286,6 +276,6 @@
 
             <!-- Page level custom scripts -->
             <script src="js/demo/datatables-demo.js"></script>
-    </body>
-</html>
+            </body>
+            </html>
 

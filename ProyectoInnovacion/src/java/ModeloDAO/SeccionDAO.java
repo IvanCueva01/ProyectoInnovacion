@@ -1,36 +1,35 @@
 package ModeloDAO;
 
+import Interfaces.CRUDseccion;
+import Modelo.Seccion;
+import java.util.List;
 import Config.Conexion;
-import Interfaces.CRUDservicio;
-import Modelo.Servicio;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.List;
 
-public class ServicioDAO implements CRUDservicio {
+public class SeccionDAO implements CRUDseccion {
 
     Conexion cn = new Conexion();
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
-    Servicio servi = new Servicio();
+    Seccion sec = new Seccion();
 
     @Override
     public List listar() {
-        ArrayList<Servicio> list = new ArrayList<>();
-        String sql = "select * from servicios";
+        ArrayList<Seccion> list = new ArrayList<>();
+        String sql = "select * from seccion";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Servicio servi = new Servicio();
-                servi.setIdservicio(rs.getInt("idservicio"));
-                servi.setNombre(rs.getString("nombre"));
-                servi.setEstado(rs.getString("estado"));
-                list.add(servi);
+                Seccion sec = new Seccion();
+                sec.setIdseccion(rs.getInt("idseccion"));
+                sec.setTitulo(rs.getString("titulo"));
+                list.add(sec);
             }
         } catch (Exception e) {
         }
@@ -38,25 +37,24 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public Servicio list(int idservicio) {
-        String sql = "select * from servicios where idservicio=" + idservicio;
+    public Seccion list(int idseccion) {
+        String sql = "select * from seccion";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                servi.setIdservicio(rs.getInt("idservicio"));
-                servi.setNombre(rs.getString("nombre"));
-                servi.setEstado(rs.getString("estado"));
+                sec.setIdseccion(rs.getInt("idseccion"));
+                sec.setTitulo(rs.getString("titulo"));
             }
         } catch (Exception e) {
         }
-        return servi;
+        return sec;
     }
 
     @Override
-    public boolean agregar(Servicio servi) {
-        String sql = "insert into servicios(nombre,estado) values ('" + servi.getNombre()+ "','" + servi.getEstado()+ "')";
+    public boolean agregar(Seccion sec) {
+        String sql = "insert into seccion(titulo) values ('" + sec.getTitulo() + "')";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -67,9 +65,8 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public boolean editar(Servicio servi) {
-        String sql = "update servicios set nombre='" + servi.getNombre()+ "',estado='" + servi.getNombre()+ "' where idservicio="
-                + servi.getIdservicio();
+    public boolean editar(Seccion sec) {
+        String sql = "update articulo set titulo='"+ sec.getTitulo()+"'";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
@@ -80,15 +77,15 @@ public class ServicioDAO implements CRUDservicio {
     }
 
     @Override
-    public boolean eliminar(int idservicio) {
-        String sql = "update servicios set estado='0' where idservicio=" + idservicio ;
+    public boolean eliminar(int idseccion) {
+     String sql = "delete from seccion where idseccion=" + idseccion;
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);
             ps.executeUpdate();
         } catch (Exception e) {
+
         }
         return false;
     }
-
 }

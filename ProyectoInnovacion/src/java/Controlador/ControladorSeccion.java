@@ -1,7 +1,8 @@
+
 package Controlador;
 
-import Modelo.Articulo;
-import ModeloDAO.ArticuloDAO;
+import Modelo.Seccion;
+import ModeloDAO.SeccionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -10,15 +11,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class SvArticulo extends HttpServlet {
+public class ControladorSeccion extends HttpServlet {
 
     String listar = "vistas/Articulo.jsp";
-    String agregar = "vistas/agregarArticulo.jsp";
-    String editar = "vistas/verArticulo.jsp";
-    Articulo arti = new Articulo();
-    ArticuloDAO artidao = new ArticuloDAO();
+    String agregar = "vistas/agregarSeccion.jsp";
+    String editar = "vistas/editarReceta.jsp";
+    Seccion sec = new Seccion();
+    SeccionDAO daosec = new SeccionDAO();
     private int id;
-
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -27,10 +28,10 @@ public class SvArticulo extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SvArticulo</title>");
+            out.println("<title>Servlet ControladorSeccion</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SvArticulo at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorSeccion at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -47,41 +48,36 @@ public class SvArticulo extends HttpServlet {
             acceso = agregar;
         } else if (accion.equalsIgnoreCase("agregar")) {
             String titulo = request.getParameter("titulo");
-            int idseccion = Integer.parseInt(request.getParameter("idseccion"));
-            String contenido = request.getParameter("contenido");
-            arti.setTitulo(titulo);
-            arti.setContenido(contenido);
-             arti.setIdseccion(idseccion);
-            artidao.agregar(arti);
+            sec.setTitulo(titulo);
+            daosec.agregar(sec);
             acceso = listar;
         } else if (accion.equalsIgnoreCase("editar")) {
-            request.setAttribute("idarti", request.getParameter("id"));
+            request.setAttribute("idsec", request.getParameter("idseccion"));
             acceso = editar;
         } else if (accion.equalsIgnoreCase("actualizar")) {
             id = Integer.parseInt(request.getParameter("id"));
             String titulo = request.getParameter("titulo");
-            int idseccion = Integer.parseInt(request.getParameter("idseccion"));
-            String contenido = request.getParameter("contenido");
-            arti.setId(id);
-            arti.setTitulo(titulo);
-            arti.setContenido(contenido);
-            artidao.editar(arti);
+            sec.setIdseccion(id);
+            sec.setTitulo(titulo);
+            daosec.editar(sec);
             acceso = listar;
         } else if (accion.equalsIgnoreCase("eliminar")) {
-            id = Integer.parseInt(request.getParameter("id"));
-            arti.setId(id);
-            artidao.eliminar(id);
+            id = Integer.parseInt(request.getParameter("idseccion"));
+            sec.setIdseccion(id);
+            daosec.eliminar(id);
             acceso = listar;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
 
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
 
     @Override
     public String getServletInfo() {

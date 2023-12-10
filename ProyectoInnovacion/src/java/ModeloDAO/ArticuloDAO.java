@@ -30,6 +30,7 @@ public class ArticuloDAO implements CRUDarticulo {
                 arti.setId(rs.getInt("id"));
                 arti.setTitulo(rs.getString("titulo"));
                 arti.setContenido(rs.getString("contenido"));
+                arti.setIdseccion(rs.getInt("idseccion"));
                 list.add(arti);
             }
         } catch (Exception e) {
@@ -48,6 +49,7 @@ public class ArticuloDAO implements CRUDarticulo {
                 arti.setId(rs.getInt("id"));
                 arti.setTitulo(rs.getString("titulo"));
                 arti.setContenido(rs.getString("contenido"));
+                arti.setIdseccion(rs.getInt("idseccion"));
             }
         } catch (Exception e) {
         }
@@ -56,8 +58,8 @@ public class ArticuloDAO implements CRUDarticulo {
 
     @Override
     public boolean agregar(Articulo arti) {
-        String sql = "insert into articulo(titulo,contenido) values "
-                + "('" + arti.getTitulo() + "','" + arti.getContenido() + "')";
+        String sql = "insert into articulo(titulo,contenido,idseccion) values "
+                + "('" + arti.getTitulo() + "','" + arti.getContenido() + "','" + arti.getIdseccion()+ "')";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

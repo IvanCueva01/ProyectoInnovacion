@@ -64,6 +64,10 @@
         <servlet-name>SvArticulo</servlet-name>
         <servlet-class>Controlador.SvArticulo</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorSeccion</servlet-name>
+        <servlet-class>Controlador.ControladorSeccion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>SvArticulo</servlet-name>
         <url-pattern>/SvArticulo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorSeccion</servlet-name>
+        <url-pattern>/ControladorSeccion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
