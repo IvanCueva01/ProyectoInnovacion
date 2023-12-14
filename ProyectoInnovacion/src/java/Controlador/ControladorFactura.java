@@ -51,13 +51,13 @@ public class ControladorFactura extends HttpServlet {
             int idservicio = Integer.parseInt(request.getParameter("idservicio")) ;
             int cantidad = Integer.parseInt(request.getParameter("cantidad")) ;
             double precioUnitario = Double.parseDouble(request.getParameter("precioUnitario")) ;
-            double total = Double.parseDouble(request.getParameter("total")) ;
             factu.setIdcliente(idcliente);
             factu.setFechafactura(fechafactura);
             factu.setIdservicio(idservicio);
             factu.setCantidad(cantidad);
             factu.setPrecioUnitario(precioUnitario);
-            factu.setTotal(total);
+            factu.setTotal(precioUnitario,cantidad);
+            factu.setIgv(precioUnitario,cantidad);
            daofactu.agregar(factu);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("editar")) {
@@ -71,14 +71,14 @@ public class ControladorFactura extends HttpServlet {
             int idservicio = Integer.parseInt(request.getParameter("idservicio")) ;
             int cantidad = Integer.parseInt(request.getParameter("cantidad")) ;
             double precioUnitario = Integer.parseInt(request.getParameter("precioUnitario")) ;
-            double total = Integer.parseInt(request.getParameter("total")) ;
             factu.setIdfactura(idfactura);
             factu.setIdcliente(idcliente);
             factu.setFechafactura(fechafactura);
             factu.setIdservicio(idservicio);
             factu.setCantidad(cantidad);
             factu.setPrecioUnitario(precioUnitario);
-            factu.setTotal(total);
+            factu.setTotal(precioUnitario,cantidad);
+            factu.setIgv(precioUnitario,cantidad);
             daofactu.editar(factu);
             acceso = listar;
         }else if (accion.equalsIgnoreCase("eliminar")) {

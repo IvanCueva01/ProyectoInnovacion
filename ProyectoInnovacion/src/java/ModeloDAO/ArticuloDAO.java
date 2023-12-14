@@ -3,11 +3,8 @@ package ModeloDAO;
 import Config.Conexion;
 import Interfaces.CRUDarticulo;
 import Modelo.Articulo;
-import java.util.List;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.sql.*;
+import java.util.*;
 
 public class ArticuloDAO implements CRUDarticulo {
 
@@ -40,7 +37,7 @@ public class ArticuloDAO implements CRUDarticulo {
 
     @Override
     public Articulo list(int id) {
-        String sql = "select * from articulo";
+        String sql = "select * from articulo where id="+id;
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sql);

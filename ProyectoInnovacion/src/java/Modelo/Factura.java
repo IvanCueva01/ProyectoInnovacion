@@ -8,17 +8,19 @@ public class Factura {
     int cantidad;
     double precioUnitario;
     double total;
+    double igv;
 
     public Factura() {
     }
 
-    public Factura(int idcliente, String fechafactura, int idservicio, int cantidad, double precioUnitario, double total) {
+    public Factura(int idcliente, String fechafactura, int idservicio, int cantidad, double precioUnitario, double total,double igv) {
         this.idcliente = idcliente;
         this.fechafactura = fechafactura;
         this.idservicio = idservicio;
         this.cantidad = cantidad;
         this.precioUnitario = precioUnitario;
         this.total = total;
+        this.igv = igv;
     }
 
     public int getIdfactura() {
@@ -73,8 +75,16 @@ public class Factura {
         return total;
     }
 
-    public void setTotal(double total) {
-        this.total = total;
+    public void setTotal(double precioUnitario,int cantidad) {
+        this.total = precioUnitario*cantidad;
+    }
+
+    public double getIgv() {
+        return igv;
+    }
+
+    public void setIgv(double precioUnitario,int cantidad) {
+        this.igv = precioUnitario*cantidad*0.18;
     }
     
 }

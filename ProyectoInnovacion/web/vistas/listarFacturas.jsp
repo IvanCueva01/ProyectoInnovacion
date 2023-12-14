@@ -124,6 +124,7 @@
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
                         <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
+                        <a class="collapse-item" href="SvArticulo?accion=listar">Base de Conocimiento</a>
                     </div>
                 </div>
             </li>
@@ -216,7 +217,10 @@
                                                 <th>ClienteID</th> 
                                                 <th>FechaFactura</th>
                                                 <th>ServicioID</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
                                                 <th>Total</th>
+                                                <th>IGV</th>
                                                 <th style="width: 210px">Acciones</th>
                                             </tr>
                                         </thead>
@@ -226,7 +230,10 @@
                                                 <th>ClienteID</th> 
                                                 <th>FechaFactura</th>
                                                 <th>ServicioID</th>
+                                                <th>Cantidad</th>
+                                                <th>Precio</th>
                                                 <th>Total</th>
+                                                <th>IGV</th>
                                                 <th style="width: 210px">Acciones</th>
                                             </tr>
                                         </tfoot>
@@ -246,7 +253,10 @@
                                                 <td><%=factu.getIdcliente()%></td> 
                                                 <td><%=factu.getFechafactura()%></td>
                                                 <td><%=factu.getIdservicio()%></td>        
+                                                <td><%=factu.getCantidad()%></td>        
+                                                <td><%=factu.getPrecioUnitario()%></td>        
                                                 <td><%=factu.getTotal()%></td>  
+                                                <td><%=factu.getIgv()%></td>  
                                                 <td style="display:flex;width: 230px">
                                                     <form>
                                                         <button type="submit" class="btn btn-primary btn-user btn-block" style="background-color:yellow; margin-left:5px">

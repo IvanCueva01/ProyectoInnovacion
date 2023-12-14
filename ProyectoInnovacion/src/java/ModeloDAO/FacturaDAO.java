@@ -33,7 +33,8 @@ public class FacturaDAO implements CRUDfactura {
                 factu.setIdservicio(rs.getInt("ServicioID"));
                 factu.setCantidad(rs.getInt("Cantidad"));
                 factu.setPrecioUnitario(rs.getDouble("PrecioUnitario"));
-                factu.setTotal(rs.getDouble("Total"));
+                factu.setTotal(rs.getDouble("PrecioUnitario"), rs.getInt("Cantidad"));
+                factu.setIgv(rs.getDouble("PrecioUnitario"), rs.getInt("Cantidad"));
                 list.add(factu);
             }
         } catch (Exception e) {
@@ -55,7 +56,8 @@ public class FacturaDAO implements CRUDfactura {
                 factu.setIdservicio(rs.getInt("ServicioID"));
                 factu.setCantidad(rs.getInt("Cantidad"));
                 factu.setPrecioUnitario(rs.getDouble("PrecioUnitario"));
-                factu.setTotal(rs.getDouble("Total"));
+                factu.setTotal(rs.getDouble("PrecioUnitario"), rs.getInt("Cantidad"));
+                factu.setIgv(rs.getDouble("PrecioUnitario"), rs.getInt("Cantidad"));
             }
         } catch (Exception e) {
         }
@@ -64,7 +66,7 @@ public class FacturaDAO implements CRUDfactura {
 
     @Override
     public boolean agregar(Factura factu) {
-        String sqlDetalles = "INSERT INTO DetallesFactura (ClienteID, FechaFactura, ServicioID, Cantidad, PrecioUnitario, Total)values(?,?,?,?,?,?)";
+        String sqlDetalles = "INSERT INTO DetallesFactura (ClienteID, FechaFactura, ServicioID, Cantidad, PrecioUnitario, Total,igv)values(?,?,?,?,?,?,?)";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sqlDetalles);
@@ -74,6 +76,7 @@ public class FacturaDAO implements CRUDfactura {
             ps.setInt(4, factu.getCantidad());
             ps.setDouble(5, factu.getPrecioUnitario());
             ps.setDouble(6, factu.getTotal());
+            ps.setDouble(7, factu.getIgv());
             ps.executeUpdate();
         } catch (Exception e) {
         }
@@ -83,7 +86,7 @@ public class FacturaDAO implements CRUDfactura {
 
     @Override
     public boolean editar(Factura factu) {
-        String sqlDetalles = "UPDATE DetallesFactura SET ClienteID=?,FechaFactura=?,ServicioID=?,Cantidad=?,PrecioUnitario=?,Total=?";
+        String sqlDetalles = "UPDATE DetallesFactura SET ClienteID=?,FechaFactura=?,ServicioID=?,Cantidad=?,PrecioUnitario=?,Total=?,igv=?";
         try {
             con = cn.getConnection();
             ps = con.prepareStatement(sqlDetalles);
@@ -93,6 +96,7 @@ public class FacturaDAO implements CRUDfactura {
             ps.setInt(4, factu.getCantidad());
             ps.setDouble(5, factu.getPrecioUnitario());
             ps.setDouble(6, factu.getTotal());
+            ps.setDouble(7, factu.getIgv());
             ps.executeUpdate();
         } catch (Exception e) {
         }

@@ -1,6 +1,6 @@
 <%@page import="java.util.Iterator"%>
 <%@page import="Modelo.Usuario"%>
-<%@page import="Modelo.Articulo"%>
+<%@page import="Modelo.*"%>
 <%@page import="java.util.List"%>
 <%@page import="ModeloDAO.UsuarioDAO"%>
 <%@page import="ModeloDAO.ArticuloDAO"%>
@@ -200,11 +200,13 @@
                         <%
                             ArticuloDAO artidao = new ArticuloDAO();
                             int id = Integer.parseInt((String) request.getAttribute("idarti"));
-                            Articulo arti = artidao.list(id);
+                            Articulo arti = (Articulo) artidao.list(id);
                         %>
                         <form class="user" action="SvArticulo">
-                            <h1><%= arti.getTitulo()%></h1>
-                            <p><%= arti.getContenido()%></p>
+                            <div>
+                                <h1><%=arti.getTitulo()%></h1>
+                                <p><%=arti.getContenido()%></p>
+                            </div>
                             <input type="hidden" name="id" value="<%=arti.getId()%>">
                             <a class="btn btn-primary btn-user btn-block" href="SvArticulo?accion=listar">Regresar</a>
                         </form>

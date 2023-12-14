@@ -123,6 +123,8 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
+                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
+                        <a class="collapse-item" href="SvArticulo?accion=listar">Base de Conocimiento</a>
                     </div>
                 </div>
             </li>

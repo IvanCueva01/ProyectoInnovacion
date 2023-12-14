@@ -51,7 +51,7 @@ public class SvArticulo extends HttpServlet {
             String contenido = request.getParameter("contenido");
             arti.setTitulo(titulo);
             arti.setContenido(contenido);
-             arti.setIdseccion(idseccion);
+            arti.setIdseccion(idseccion);
             artidao.agregar(arti);
             acceso = listar;
         } else if (accion.equalsIgnoreCase("editar")) {
@@ -65,6 +65,7 @@ public class SvArticulo extends HttpServlet {
             arti.setId(id);
             arti.setTitulo(titulo);
             arti.setContenido(contenido);
+            arti.setIdseccion(idseccion);
             artidao.editar(arti);
             acceso = listar;
         } else if (accion.equalsIgnoreCase("eliminar")) {
