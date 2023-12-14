@@ -44,7 +44,9 @@ public class ControladorReporteFactura extends HttpServlet {
 
         try {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoinnovacion", "root", "");
-            PreparedStatement ps = cn.prepareStatement("select * from detallesfactura");
+            PreparedStatement ps = cn.prepareStatement("SELECT detallesfactura.*, cliente.NOMBRES as nombre_cliente, servicios.nombre as servicio FROM detallesfactura "
+                    + "INNER JOIN cliente ON detallesfactura.ClienteID = cliente.IDCLIENTE "
+                    + "INNER JOIN servicios ON detallesfactura.ServicioID = servicios.idservicio" );
             ResultSet rs = ps.executeQuery();
             Document documento = new Document();
             PdfWriter.getInstance(documento, response.getOutputStream());
@@ -53,19 +55,19 @@ public class ControladorReporteFactura extends HttpServlet {
             documento.add(new Paragraph(" "));
             PdfPTable tabla = new PdfPTable(8);
             tabla.addCell("ID FACTURA");
-            tabla.addCell("ID CLIENTE");
+            tabla.addCell("nombre_cliente");
             tabla.addCell("FECHA");
-            tabla.addCell("ID SERVICIO");
+            tabla.addCell("servicio");
             tabla.addCell("CANTIDAD");
             tabla.addCell("PRECIO UNITARIO");
             tabla.addCell("TOTAL");
             tabla.addCell("IGV");
             if (rs.next()) {
                 do {
-                    tabla.addCell(rs.getString(1));
-                    tabla.addCell(rs.getString(2));
+                    tabla.addCell(rs.getString(1));               
+                    tabla.addCell(rs.getString(9));               
                     tabla.addCell(rs.getString(3));
-                    tabla.addCell(rs.getString(4));
+                    tabla.addCell(rs.getString(10));
                     tabla.addCell(rs.getString(5));
                     tabla.addCell(rs.getString(6));
                     tabla.addCell(rs.getString(7));

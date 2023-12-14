@@ -1,9 +1,9 @@
 <%@page import="java.util.Iterator"%>
+<%@ page import="java.text.DecimalFormat" %>
 <%@page import="java.util.Collections"%>
 <%@page import="java.util.List"%>
-<%@page import="Modelo.Usuario"%>
-<%@page import="Modelo.Recordatorio"%>
-<%@page import="ModeloDAO.RecordatorioDAO"%>
+<%@page import="Modelo.*"%>
+<%@page import="ModeloDAO.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -208,6 +208,18 @@
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
                             <h1 class="h3 mb-0 text-gray-800">GRUPO VICENTE</h1>
                         </div>
+                        <%
+                            FacturaDAO facturaDAO = new FacturaDAO();
+                            List<Factura> facturas = facturaDAO.listar();
+                            double montoTotal = 0;
+                            DecimalFormat formatoDecimal = new DecimalFormat("#,##0.00");
+                            for (Factura factura : facturas) {
+                                montoTotal += factura.getTotal();
+                            }
+                            String montoMensual = formatoDecimal.format(montoTotal*0.07);
+                            String montoAnual = formatoDecimal.format(montoTotal);
+                        %>
+
                         <div class="row">
 
                             <!-- Earnings (Monthly) Card Example -->
@@ -218,7 +230,7 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                     Ganancias Mensuales</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">S/10,000</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">S/.<%=montoMensual%></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -235,7 +247,7 @@
                                             <div class="col mr-2">
                                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                     Ganancias Anuales</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">S/120,000</div>
+                                                <div class="h5 mb-0 font-weight-bold text-gray-800">S/.<%=montoAnual%></div>
                                             </div>
                                             <div class="col-auto">
                                                 <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -265,7 +277,7 @@
                         </div>
 
                         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">RECORDATORIOS</h1>
+                            <h1 class="h3 mb-0 text-gray-800">NOTAS</h1>
                             <a href="SvRecordatorio?accion=mostraragregar" class="btn btn-secondary btn-user btn-link "
                                style="color:white; margin-left:5px">
                                 <b>Agregar Recordatorio</b></a> 

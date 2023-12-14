@@ -1,24 +1,31 @@
-
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
 package Controlador;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.StringReader;
-import java.util.Date;
-import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.*;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfPTable;
-import java.awt.HeadlessException;
-import java.sql.*;
-import javax.swing.JOptionPane;
 
-public class ControladorReporteIncidencia extends HttpServlet {
+/**
+ *
+ * @author Ivan
+ */
+public class ControladorReporteEmpresa extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,35 +40,32 @@ public class ControladorReporteIncidencia extends HttpServlet {
             throws ServletException, IOException {
          response.setContentType("application/pdf");
         response.setHeader("Content-Disposition",
-                "attachment;filename=\"reporte-incidencias.pdf\"");
+                "attachment;filename=\"reporte-empresas.pdf\"");
 
             try {
                 Connection cn = DriverManager.getConnection("jdbc:mysql://localhost:3307/proyectoinnovacion", "root", "");
-                PreparedStatement ps = cn.prepareStatement("SELECT incidencias.*, empleado.NOMBRES as nombre_empleado, cliente.NOMBRES as nombre_cliente FROM incidencias "
-                        + "INNER JOIN empleado ON incidencias.idempleado = empleado.IDEMPLE INNER JOIN cliente ON incidencias.idcliente = cliente.IDCLIENTE");
+                PreparedStatement ps = cn.prepareStatement("select * from empresa");
                 ResultSet rs = ps.executeQuery();
                 Document documento = new Document();
                 PdfWriter.getInstance(documento, response.getOutputStream());
                 documento.open();
-                documento.add(new Paragraph("LISTA DE INCIDENCIAS"));
+                documento.add(new Paragraph("LISTA DE EMPRESAS"));
                 documento.add(new Paragraph(" "));
-                PdfPTable tabla = new PdfPTable(7);
-                tabla.addCell("ID incidencia");
-                tabla.addCell("Asunto");
-                tabla.addCell("Detalle");
-                tabla.addCell("FechaRegistro");
-                tabla.addCell("Estado");
-                tabla.addCell("nombre_cliente");
-                tabla.addCell("nombre_empleado");
+                PdfPTable tabla = new PdfPTable(6);
+                tabla.addCell("RUC");
+                tabla.addCell("RAZON SOCIAL");
+                tabla.addCell("TELEFONO");
+                tabla.addCell("CORREO");
+                tabla.addCell("DIRECCION");
+                tabla.addCell("ESTADO");
                 if (rs.next()) {
                     do {
                         tabla.addCell(rs.getString(1));
+                        tabla.addCell(rs.getString(2));
+                        tabla.addCell(rs.getString(3));
                         tabla.addCell(rs.getString(4));
                         tabla.addCell(rs.getString(5));
                         tabla.addCell(rs.getString(6));
-                        tabla.addCell(rs.getString(7));
-                        tabla.addCell(rs.getString(8));
-                        tabla.addCell(rs.getString(9));
                     } while (rs.next());
                     documento.add(tabla);
                 }

@@ -1,12 +1,8 @@
-<%@page import="java.util.Collections"%>
-<%@page import="ModeloDAO.ComentarioDAO"%>
-<%@page import="Modelo.Comentario"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="Modelo.Usuario"%>
-<%@page import="Modelo.*"%>
+<%@page import="Modelo.Comentario"%>
+<%@page import="ModeloDAO.ComentarioDAO"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.UsuarioDAO"%>
-<%@page import="ModeloDAO.ArticuloDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
@@ -17,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Gruvitec System</title>
+    <title>Agregar comentario</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -45,7 +41,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-solid fa-laptop"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Gruvitec System </div>
+                <div class="sidebar-brand-text mx-3">Gruvitec System</div>
             </a>
 
             <!-- Divider -->
@@ -109,9 +105,9 @@
                      data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Acciones:</h6>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Incidencias</a>
-                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Incidencias</a>
-                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Servicios</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=listar">Listar Pedidos</a>
+                        <a class="collapse-item" href="ControladorIncidencias?accion=mostraragregar">Registrar Pedidos</a>
+                        <a class="collapse-item" href="ControladorServicio?accion=listar">Listar Productos</a>
                     </div>
                 </div>
             </li>
@@ -128,8 +124,6 @@
                         <h6 class="collapse-header">Acciones:</h6>
                         <a class="collapse-item" href="ControladorUsuario?accion=listar">Listar Usuarios</a>
                         <a class="collapse-item" href="ControladorUsuario?accion=mostraragregar">Registrar usuarios</a>
-                        <a class="collapse-item" href="ControladorFactura?accion=listar">Lista de Facturaciones</a>
-                        <a class="collapse-item" href="SvArticulo?accion=listar">Base de Conocimiento</a>
                     </div>
                 </div>
             </li>
@@ -202,59 +196,29 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
+
+                        <h1>Editar comentario</h1>
                         <%
-                            ArticuloDAO artidao = new ArticuloDAO();
-                            int id = Integer.parseInt((String) request.getAttribute("idarti"));
-                            Articulo arti = (Articulo) artidao.list(id);
+                            ComentarioDAO daocom = new ComentarioDAO();
+                            int id = Integer.parseInt((String) request.getAttribute("idcom"));
+                            Comentario com = (Comentario) daocom.list(id);
                         %>
-                        <form class="user" action="SvArticulo">
-                            <div>
-                                <h1><%=arti.getTitulo()%></h1>
-                                <p><%=arti.getContenido()%></p>
+                        <form class="user" action="SvComentario">
+                            <div class="col-sm-6 mb-3">
+                                <p>Autor:</p>
+                                <input type="text" class="form-control form-control-user" name="autor" value="<%=com.getAutor()%>">
                             </div>
-                            <input type="hidden" name="id" value="<%=arti.getId()%>">
-                            <a class="btn btn-primary btn-user btn-block" href="SvArticulo?accion=listar">Regresar</a>
+                            <div class="col-sm-6 mb-3">
+                                <p>Comentario:</p>
+                                <textarea id="id" name="comentario" rows="20" cols="100" ><%=com.getMensaje()%></textarea>
+                            </div>
+                                <input type="hidden" name="txtid" value="<%=com.getId()%>">
+                            <input class="btn btn-primary btn-user btn-block" type="submit" name="accion" value="actualizar">
+                            <a class="btn btn-primary btn-user btn-block" href="SvComentario?accion=listar">Regresar</a>           
                         </form>
+                        
                         <!-- /.container-fluid -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">COMENTARIOS</h1>
-                            <a href="SvComentario?accion=mostraragregar" class="btn btn-secondary btn-user btn-link "
-                               style="color:white; margin-left:5px">
-                                <b>Añadir comentario</b></a> 
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-6 d-lg-inline-block">
-                                <%
-                                    ComentarioDAO comentarioDAO = new ComentarioDAO();
-                                    List<Comentario> mensajes = comentarioDAO.listar();
-                                    Iterator<Comentario> iter = mensajes.iterator();
-                                    Comentario com = null;
-                                    Collections.reverse(mensajes);
-                                    while (iter.hasNext()) {
-                                        com = iter.next();
-                                %>
-                                <!-- Dropdown Card Example -->
-
-                                <div class="card shadow mb-4">
-
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary"><%=com.getAutor()%></h6>
-
-                                    </div>
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <p class="card-text"><%=com.getMensaje()%></p>
-                                        <p class="blockquote-footer"><%=com.getFecha()%></p>
-                                        <a href="SvComentario?accion=editar&id=<%=com.getId()%>" class="card-link">Editar</a>
-                                        <a href="SvComentario?accion=eliminar&id=<%=com.getId()%>" class="card-link">Eliminar</a>
-                                    </div>
-                                </div>
-                                <%}%>
-                            </div>
-                        </div>
                     </div>
                     <!-- End of Main Content -->
                     <!-- Footer -->     
@@ -325,6 +289,4 @@
             <script src="js/demo/datatables-demo.js"></script>
             </body>
             </html>
-
-
 

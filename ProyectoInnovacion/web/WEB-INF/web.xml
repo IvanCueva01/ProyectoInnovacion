@@ -72,6 +72,14 @@
         <servlet-name>ControladorReporteFactura</servlet-name>
         <servlet-class>Controlador.ControladorReporteFactura</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorReporteEmpresa</servlet-name>
+        <servlet-class>Controlador.ControladorReporteEmpresa</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SvComentario</servlet-name>
+        <servlet-class>Controlador.SvComentario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorUsuario</servlet-name>
         <url-pattern>/ControladorUsuario</url-pattern>
@@ -143,6 +151,14 @@
     <servlet-mapping>
         <servlet-name>ControladorReporteFactura</servlet-name>
         <url-pattern>/ControladorReporteFactura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorReporteEmpresa</servlet-name>
+        <url-pattern>/ControladorReporteEmpresa</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SvComentario</servlet-name>
+        <url-pattern>/SvComentario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

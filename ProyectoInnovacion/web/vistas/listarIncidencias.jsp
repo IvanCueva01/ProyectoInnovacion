@@ -1,7 +1,7 @@
 <%@page import="java.util.Iterator"%>
-<%@page import="Modelo.Incidencia"%>
+<%@page import="Modelo.*"%>
 <%@page import="java.util.List"%>
-<%@page import="ModeloDAO.IncidenciaDAO"%>
+<%@page import="ModeloDAO.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <head>
